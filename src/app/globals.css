@@ -1,22 +1,12 @@
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  --background: #f8fafc;
-  --foreground: #0f172a;
-  
-  --accent-1: rgba(99, 102, 241, 0.6); /* Indigo */
-  --accent-2: rgba(236, 72, 153, 0.6); /* Pink */
-  --accent-3: rgba(14, 165, 233, 0.6); /* Light Blue */
-  
-  --card-bg: rgba(255, 255, 255, 0.6);
-  --card-border: rgba(255, 255, 255, 0.8);
-  
-  --font-heading: 'Space Grotesk', sans-serif;
-  --font-body: 'Inter', sans-serif;
+  --background: #1d242a;
+  --foreground: #ffffff;
 }
 
 * {
@@ -31,51 +21,48 @@ body {
   overflow-x: hidden;
   background-color: var(--background);
   color: var(--foreground);
-  font-family: var(--font-body);
+  font-family: 'Open Sans', sans-serif;
   scroll-behavior: smooth;
 }
 
 a {
   color: inherit;
   text-decoration: none;
+  transition: color 0.2s ease-in-out;
 }
 
-button {
-  font-family: var(--font-body);
+a:hover {
+  color: #ed4933;
 }
 
-h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-heading);
-  letter-spacing: -0.02em;
+/* Subtle overlay texture effect common in Spectral */
+.texture-overlay {
+  position: relative;
 }
 
-/* Utilities */
-.glass {
-  background: var(--card-bg);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid var(--card-border);
-  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.05);
+.texture-overlay::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-image: url('data:image/svg+xml;utf8,<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><filter id="noiseFilter"><feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23noiseFilter)"/></svg>');
+  opacity: 0.03;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.content-z {
+  position: relative;
+  z-index: 10;
 }
 
 .placeholder-media {
-  background: linear-gradient(135deg, rgba(200, 200, 200, 0.3) 0%, rgba(240, 240, 240, 0.6) 100%);
-  border: 1px dashed rgba(0, 0, 0, 0.2);
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px dashed rgba(255, 255, 255, 0.2);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #64748b;
+  color: #a0a0a0;
   font-weight: 500;
-  border-radius: 12px;
+  border-radius: 4px;
   overflow: hidden;
-}
-
-/* Gradient Orbs for background */
-.gradient-orb {
-  position: fixed;
-  border-radius: 50%;
-  filter: blur(80px);
-  z-index: -1;
-  opacity: 0.8;
-  pointer-events: none;
 }

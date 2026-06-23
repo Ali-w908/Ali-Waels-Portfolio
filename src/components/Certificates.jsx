@@ -6,40 +6,41 @@ import { Award } from 'lucide-react';
 
 export default function Certificates() {
   return (
-    <section id="certificates" className="w-full py-24 px-8 z-10 relative">
-      <div className="max-w-7xl mx-auto">
+    <section id="certificates" className="w-full py-24 px-8 bg-spectral-alt texture-overlay relative">
+      <div className="content-z max-w-5xl mx-auto">
         <motion.div
-          initial={{ opacity: 0, y: 50 }}
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.6 }}
-          className="mb-12"
+          className="mb-16 text-center"
         >
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-slate-800 flex items-center gap-3">
-            <Award className="w-8 h-8 text-indigo-600" />
-            Certifications
-          </h2>
+          <h2 className="text-3xl md:text-4xl font-bold uppercase tracking-widest text-white mb-4">Certifications</h2>
+          <div className="w-16 h-1 bg-spectral-accent mx-auto mb-6"></div>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="flex flex-col gap-6">
           {portfolioData.certificates.map((cert, index) => (
             <motion.div
               key={index}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="glass p-6 rounded-2xl flex items-center justify-between interactive hover:bg-white/60 transition-colors"
+              className="bg-spectral-bg p-6 md:p-8 rounded-sm shadow-md border-l-4 border-l-spectral-accent flex flex-col md:flex-row items-start md:items-center justify-between hover:bg-spectral-lighter/20 transition-colors"
             >
-              <div>
-                <h3 className="text-lg font-bold text-slate-800">{cert.title}</h3>
-                <p className="text-slate-500">{cert.issuer}</p>
+              <div className="flex items-start gap-4 mb-4 md:mb-0">
+                <div className="mt-1 text-spectral-accent">
+                  <Award className="w-6 h-6" />
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold text-white uppercase tracking-wider">{cert.title}</h3>
+                  <p className="text-md text-gray-400 mt-1">{cert.issuer}</p>
+                </div>
               </div>
-              <div className="text-right">
-                <span className="text-sm font-medium text-pink-600 bg-pink-50 px-3 py-1 rounded-full">
-                  {cert.date}
-                </span>
-              </div>
+              <span className="px-4 py-2 bg-spectral-alt text-white font-bold tracking-widest text-sm rounded-sm">
+                {cert.date}
+              </span>
             </motion.div>
           ))}
         </div>

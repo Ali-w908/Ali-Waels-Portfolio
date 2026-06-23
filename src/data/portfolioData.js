@@ -5,7 +5,7 @@ export const portfolioData = {
     phone: "01011050393",
     email: "aliwael908@gmail.com",
     linkedin: "linkedin.com/in/ali-wael908",
-    github: "github.com/aliwael", // Assuming standard, update later
+    github: "github.com/Ali-W908",
     summary: "Passionate about bridging the gap between hardware and software. Dedicated to clean architecture, high performance, and continuous learning. Bringing a deep curiosity and a strong technical foundation in embedded systems, Linux, robotics, automation, and machine learning to build robust physical and digital systems."
   },
   projects: [
@@ -18,7 +18,7 @@ export const portfolioData = {
       deliverables: "Develop a safe, reliable medical ventilator with machine learning anomaly detection.",
       results: "Assembled all electrical components, implemented advanced S-Curve motion profiling for stepper motors, designed signal conditioning using EMA filters, and directed a cross-functional Agile team.",
       skills: ["Embedded C/C++", "Motor Control", "ADC Oversampling", "Agile Leadership"],
-      repo: "https://github.com/aliwael/bvm-ventilator"
+      repo: "https://github.com/Ali-W908/bvm-ventilator"
     },
     {
       id: "bottling-simulation",
