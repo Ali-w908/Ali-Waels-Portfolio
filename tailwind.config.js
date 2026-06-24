@@ -8,19 +8,28 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        spectral: {
-          bg: '#1d242a',
-          alt: '#2e3842',
-          lighter: '#3a4652',
-          accent: '#ed4933', // The classic Spectral red/orange
-          accentHover: '#ef5e4a',
-          text: '#ffffff',
-          muted: '#a0a0a0',
+        anti: {
+          bg: '#ffffff',
+          surface: '#f8f9fa',
+          surfaceHover: '#f1f3f4',
+          border: '#dadce0',
+          text: '#202124',
+          textMuted: '#5f6368',
+          primary: '#1a73e8', // Google Blue
+          primaryHover: '#174ea6',
+          accentRed: '#ea4335',
+          accentYellow: '#fbbc04',
+          accentGreen: '#34a853',
+          accentPurple: '#a142f4',
+          accentCyan: '#12b5cb',
         }
       },
       fontFamily: {
-        spectral: ['"Open Sans"', 'sans-serif'], // Spectral usually uses Open Sans
-        heading: ['"Open Sans"', 'sans-serif'],
+        sans: ['"Inter"', 'sans-serif'],
+      },
+      boxShadow: {
+        'google': '0 1px 2px 0 rgba(60,64,67,0.3), 0 1px 3px 1px rgba(60,64,67,0.15)',
+        'google-hover': '0 1px 3px 0 rgba(60,64,67,0.3), 0 4px 8px 3px rgba(60,64,67,0.15)',
       }
     },
   },

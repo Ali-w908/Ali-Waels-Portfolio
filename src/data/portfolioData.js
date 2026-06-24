@@ -1,8 +1,8 @@
 export const portfolioData = {
   personalInfo: {
-    name: "Ali Wael Mohamed Ali Ahmed",
+    name: "Ali Wael Mohamed Ali",
     title: "Mechatronics Engineer",
-    phone: "01011050393",
+    phone: "+201011050393",
     email: "aliwael908@gmail.com",
     linkedin: "linkedin.com/in/ali-wael908",
     github: "github.com/Ali-W908",
@@ -18,7 +18,7 @@ export const portfolioData = {
       deliverables: "Develop a safe, reliable medical ventilator with machine learning anomaly detection.",
       results: "Assembled all electrical components, implemented advanced S-Curve motion profiling for stepper motors, designed signal conditioning using EMA filters, and directed a cross-functional Agile team.",
       skills: ["Embedded C/C++", "Motor Control", "ADC Oversampling", "Agile Leadership"],
-      repo: "https://github.com/Ali-W908/bvm-ventilator"
+      repo: "https://github.com/Smart-E-Vent-26/Smart-E-Vent-Software"
     },
     {
       id: "bottling-simulation",

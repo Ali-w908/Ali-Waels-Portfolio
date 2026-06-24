@@ -2,44 +2,46 @@
 
 import { motion } from 'framer-motion';
 import { portfolioData } from '../data/portfolioData';
-import { Briefcase, GraduationCap } from 'lucide-react';
 
 export default function Timeline() {
   return (
-    <section id="experience" className="w-full py-24 px-8 bg-spectral-alt texture-overlay relative">
-      <div className="content-z max-w-4xl mx-auto">
+    <section id="experience" className="w-full py-24 px-8 md:px-16 lg:px-32 bg-white relative">
+      <div className="max-w-4xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
+          viewport={{ once: true }}
           transition={{ duration: 0.6 }}
           className="mb-16 text-center"
         >
-          <h2 className="text-3xl md:text-4xl font-bold uppercase tracking-widest text-white mb-4">Experience & Education</h2>
-          <div className="w-16 h-1 bg-spectral-accent mx-auto mb-6"></div>
-          <p className="text-lg text-gray-400 max-w-2xl mx-auto">
-            My professional journey and academic background.
-          </p>
+          <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-anti-text mb-4">Experience</h2>
+          <p className="text-xl text-anti-textMuted">Where I've built things.</p>
         </motion.div>
 
-        <div className="relative border-l-2 border-spectral-lighter ml-4 md:ml-1/2">
+        <div className="relative border-l-2 border-anti-border ml-4 md:ml-8">
           {portfolioData.experience.map((exp, index) => (
             <motion.div
               key={`exp-${index}`}
               initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
+              viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
               className="mb-12 ml-8 relative"
             >
-              <span className="absolute -left-[41px] top-1 flex items-center justify-center w-8 h-8 bg-spectral-bg rounded-full border-2 border-spectral-lighter text-spectral-accent">
-                <Briefcase className="w-4 h-4" />
+              <span className="absolute -left-[41px] top-2 flex items-center justify-center w-8 h-8 bg-white rounded-full border-2 border-anti-primary shadow-sm">
+                <span className="w-2.5 h-2.5 bg-anti-primary rounded-full"></span>
               </span>
-              <div className="bg-spectral-bg p-6 rounded-md shadow-lg border border-spectral-lighter/50">
-                <h3 className="flex items-center mb-1 text-xl font-bold text-white uppercase tracking-wider">{exp.role}</h3>
-                <time className="block mb-4 text-sm font-bold tracking-widest text-spectral-accent">{exp.date}</time>
-                <h4 className="mb-4 text-md font-semibold text-gray-300">{exp.company}</h4>
-                <p className="text-base font-normal text-gray-400 leading-relaxed">{exp.description}</p>
+              <div className="google-card p-8">
+                <div className="flex flex-col md:flex-row md:justify-between md:items-start mb-4">
+                  <div>
+                    <h3 className="text-2xl font-bold text-anti-text tracking-tight">{exp.role}</h3>
+                    <h4 className="text-lg font-medium text-anti-primary">{exp.company}</h4>
+                  </div>
+                  <time className="mt-2 md:mt-0 px-3 py-1 bg-anti-surface rounded-full text-sm font-medium text-anti-textMuted inline-block whitespace-nowrap border border-anti-border">
+                    {exp.date}
+                  </time>
+                </div>
+                <p className="text-base text-anti-textMuted leading-relaxed">{exp.description}</p>
               </div>
             </motion.div>
           ))}
@@ -47,18 +49,24 @@ export default function Timeline() {
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
+            viewport={{ once: true, margin: "-50px" }}
             transition={{ duration: 0.5 }}
             className="mb-12 ml-8 relative"
           >
-            <span className="absolute -left-[41px] top-1 flex items-center justify-center w-8 h-8 bg-spectral-bg rounded-full border-2 border-spectral-lighter text-white">
-              <GraduationCap className="w-4 h-4" />
+            <span className="absolute -left-[41px] top-2 flex items-center justify-center w-8 h-8 bg-white rounded-full border-2 border-anti-accentGreen shadow-sm">
+              <span className="w-2.5 h-2.5 bg-anti-accentGreen rounded-full"></span>
             </span>
-            <div className="bg-spectral-bg p-6 rounded-md shadow-lg border-l-4 border-l-white">
-              <h3 className="flex items-center mb-1 text-xl font-bold text-white uppercase tracking-wider">{portfolioData.education.degree}</h3>
-              <time className="block mb-4 text-sm font-bold tracking-widest text-spectral-accent">{portfolioData.education.date}</time>
-              <h4 className="mb-4 text-md font-semibold text-gray-300">{portfolioData.education.school}</h4>
-              <p className="text-base font-normal text-gray-400 leading-relaxed">{portfolioData.education.details}</p>
+            <div className="google-card p-8">
+               <div className="flex flex-col md:flex-row md:justify-between md:items-start mb-4">
+                  <div>
+                    <h3 className="text-2xl font-bold text-anti-text tracking-tight">{portfolioData.education.degree}</h3>
+                    <h4 className="text-lg font-medium text-anti-accentGreen">{portfolioData.education.school}</h4>
+                  </div>
+                  <time className="mt-2 md:mt-0 px-3 py-1 bg-anti-surface rounded-full text-sm font-medium text-anti-textMuted inline-block whitespace-nowrap border border-anti-border">
+                    {portfolioData.education.date}
+                  </time>
+                </div>
+              <p className="text-base text-anti-textMuted leading-relaxed">{portfolioData.education.details}</p>
             </div>
           </motion.div>
         </div>

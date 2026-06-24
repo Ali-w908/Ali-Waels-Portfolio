@@ -6,23 +6,20 @@ import Link from 'next/link';
 
 export default function Projects() {
   return (
-    <section id="projects" className="w-full py-24 px-8 bg-spectral-bg texture-overlay relative">
-      <div className="content-z max-w-7xl mx-auto">
+    <section id="projects" className="w-full py-24 px-8 md:px-16 lg:px-32 bg-anti-surface relative">
+      <div className="max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
+          viewport={{ once: true }}
           transition={{ duration: 0.6 }}
           className="mb-16 text-center"
         >
-          <h2 className="text-3xl md:text-4xl font-bold uppercase tracking-widest text-white mb-4">Featured Projects</h2>
-          <div className="w-16 h-1 bg-spectral-accent mx-auto mb-6"></div>
-          <p className="text-lg text-gray-400 max-w-2xl mx-auto">
-            A selection of my recent mechatronics, embedded systems, and software engineering projects.
-          </p>
+          <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-anti-text mb-4">Selected Work</h2>
+          <p className="text-xl text-anti-textMuted">Projects spanning robotics, software, and embedded systems.</p>
         </motion.div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {portfolioData.projects.map((project, index) => (
             <motion.div
               key={project.id}
@@ -31,27 +28,27 @@ export default function Projects() {
               viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
             >
-              <Link href={`/projects/${project.id}`}>
-                <div className="bg-spectral-alt rounded-sm overflow-hidden h-full flex flex-col group border border-transparent hover:border-spectral-lighter transition-colors shadow-md">
-                  <div className="aspect-video w-full placeholder-media rounded-none group-hover:opacity-80 transition-opacity">
-                    <p className="font-medium text-sm text-spectral-muted tracking-widest">[THUMBNAIL 16:9]</p>
+              <Link href={`/projects/${project.id}`} className="block h-full">
+                <div className="google-card h-full flex flex-col group">
+                  <div className="aspect-[16/10] w-full placeholder-media border-b border-anti-border rounded-b-none group-hover:bg-white transition-colors">
+                    <p className="text-sm font-medium opacity-50 tracking-wide">[THUMBNAIL 16:10]</p>
                   </div>
-                  <div className="p-6 flex flex-col flex-grow">
-                    <div className="flex justify-between items-start mb-2">
-                      <h3 className="text-xl font-bold text-white group-hover:text-spectral-accent transition-colors uppercase tracking-wider">
+                  <div className="p-8 flex flex-col flex-grow">
+                    <div className="mb-4">
+                      <span className="text-xs font-bold tracking-wider uppercase text-anti-primary mb-2 block">{project.role}</span>
+                      <h3 className="text-2xl font-bold text-anti-text tracking-tight group-hover:text-anti-primary transition-colors">
                         {project.title}
                       </h3>
                     </div>
-                    <p className="text-xs text-spectral-accent font-bold tracking-widest mb-4 uppercase">{project.role}</p>
-                    <p className="text-gray-400 mb-6 flex-grow leading-relaxed text-sm">{project.description}</p>
+                    <p className="text-base text-anti-textMuted mb-8 flex-grow leading-relaxed">{project.description}</p>
                     <div className="flex flex-wrap gap-2 mt-auto">
                       {project.skills.slice(0, 3).map((skill, i) => (
-                        <span key={i} className="px-2 py-1 bg-spectral-bg text-gray-300 rounded text-[10px] uppercase tracking-wider font-semibold border border-spectral-lighter/50">
+                        <span key={i} className="px-3 py-1 bg-anti-surface text-anti-textMuted rounded-full text-xs font-medium border border-anti-border">
                           {skill}
                         </span>
                       ))}
                       {project.skills.length > 3 && (
-                        <span className="px-2 py-1 bg-spectral-bg text-gray-300 rounded text-[10px] uppercase tracking-wider font-semibold border border-spectral-lighter/50">
+                        <span className="px-3 py-1 bg-anti-surface text-anti-textMuted rounded-full text-xs font-medium border border-anti-border">
                           +{project.skills.length - 3}
                         </span>
                       )}
