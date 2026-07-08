@@ -6,19 +6,17 @@ import { portfolioData } from '../data/portfolioData';
 import Image from 'next/image';
 import Magnetic from './Magnetic';
 
-export default function About({ scrollProgress }) {
+export default function About() {
   const containerRef = useRef(null);
 
-  const { scrollYProgress: localScrollY } = useScroll({
+  const { scrollYProgress } = useScroll({
     target: containerRef,
-    offset: ["start bottom", "start center"]
+    offset: ["start end", "end center"]
   });
 
-  // Synchronized Text Reveal Transforms
-  const textY = useTransform(localScrollY, [0, 1], [40, 0]);
-  const textOpacity = useTransform(localScrollY, [0, 1], [0, 1]);
-  const textBlurVal = useTransform(localScrollY, [0, 1], [10, 0]);
-  const textFilter = useTransform(textBlurVal, (v) => `blur(${v}px)`);
+  const textY = useTransform(scrollYProgress, [0, 1], [40, 0]);
+  const textOpacity = useTransform(scrollYProgress, [0, 0.6], [0, 1]);
+
   return (
     <section
       id="about"
@@ -26,36 +24,45 @@ export default function About({ scrollProgress }) {
       className="w-full py-32 px-8 md:px-16 lg:px-32 relative z-10"
     >
       <motion.div
-        viewport={{ amount: 0.5 }}
         className="max-w-6xl mx-auto flex flex-col lg:flex-row gap-16 lg:gap-32 items-center lg:items-center"
       >
-
+        {/* Portrait */}
         <motion.div
-          className="w-full lg:w-1/3 aspect-[3/4] relative overflow-hidden rounded-xl shrink-0"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, ease: [0.25, 1, 0.5, 1] }}
+          className="w-full lg:w-1/3 aspect-[3/4] relative overflow-hidden rounded-2xl shrink-0 shadow-lg"
         >
-          {/* Empty slot for Filmstrip to land into */}
+          <Image
+            src="/media/portrait-abtme.jpeg"
+            alt="Ali Wael"
+            fill
+            className="object-cover"
+            priority
+          />
         </motion.div>
 
         <div className="w-full lg:w-2/3 flex flex-col justify-center pt-8 relative z-20 text-theme-text">
           <motion.h2
-            style={{ y: textY, opacity: textOpacity, filter: textFilter }}
-            className="text-5xl md:text-7xl font-bold tracking-tighter uppercase mb-12"
+            style={{ y: textY, opacity: textOpacity }}
+            className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-tight mb-12"
           >
             I am a multi-disciplinary engineer driven by motion, logic, and aesthetics.
           </motion.h2>
 
           <motion.p
-            style={{ y: textY, opacity: textOpacity, filter: textFilter }}
-            className="text-xl md:text-2xl font-medium leading-relaxed opacity-70 mb-16"
+            style={{ y: textY, opacity: textOpacity }}
+            className="text-lg md:text-xl font-medium leading-relaxed opacity-70 mb-16"
           >
             {portfolioData.personalInfo.summary}
           </motion.p>
 
           <motion.div
-            style={{ y: textY, opacity: textOpacity, filter: textFilter }}
+            style={{ y: textY, opacity: textOpacity }}
           >
             <Magnetic>
-              <a href="/resume.pdf" target="_blank" className="inline-flex items-center justify-center w-48 h-48 rounded-full border border-black/20 text-lg font-bold tracking-widest uppercase hover:bg-[var(--accent-color)] hover:border-[var(--accent-color)] hover:text-[#F3FCF0] transition-colors duration-500">
+              <a href="/resume.pdf" target="_blank" className="inline-flex items-center justify-center w-44 h-44 rounded-full border border-theme-text/20 text-base font-bold tracking-widest uppercase hover:bg-theme-text hover:text-theme-main transition-colors duration-500">
                 Download CV
               </a>
             </Magnetic>
