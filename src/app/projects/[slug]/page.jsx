@@ -19,7 +19,11 @@ function extractProjectData(slug) {
     'smartwatch': 'AssemblyOnSTM32',
     'pick-place-robot': 'Pick-and-Place-Robotic-Arm',
     'solar-tracker': 'Dual-Axis-Solar-Tracker',
-    'bottling-simulation': 'PLC-Automated-Bottle-Filling-and-Capping-Machine'
+    'bottling-simulation': 'PLC-Automated-Bottle-Filling-and-Capping-Machine',
+    'embedded-linux-2025': 'Ezzmedical-Embedded-Linux/Internship2025',
+    'embedded-linux-2024': 'Ezzmedical-Embedded-Linux/Internship2024',
+    'atm-software': null, // No project folder exists
+    'robotic-arm': null,  // No project folder exists
   };
 
   const folderName = FOLDER_MAP[slug];

@@ -7,6 +7,8 @@ import { motion, useScroll, useVelocity, useTransform, useSpring, useAnimationFr
 import { portfolioData } from '../data/portfolioData';
 import { usePreloader } from '../context/PreloaderContext';
 
+import HeroWebGLPortrait from './HeroWebGLPortrait';
+
 export default function Hero() {
   const { hasRun } = usePreloader();
   const containerRef = useRef(null);
@@ -120,7 +122,16 @@ export default function Hero() {
         transition={{ duration: 1.5, ease: [0.76, 0, 0.24, 1], delay: 0.2 }}
       ></motion.canvas>
 
-      {/* Removed Redundant Portrait Placeholder as it's now handled by HeroAboutWrapper */}
+      {/* Restored HeroWebGLPortrait in a smaller frame */}
+      <motion.div
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={hasRun ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
+        transition={{ duration: 1, ease: [0.76, 0, 0.24, 1], delay: 0.3 }}
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 w-48 h-64 md:w-64 md:h-80 lg:w-80 lg:h-[400px] rounded-3xl overflow-hidden border-2 border-white/20 shadow-2xl mix-blend-luminosity"
+        style={{ rotateX, rotateY, perspective: 1000 }}
+      >
+        <HeroWebGLPortrait />
+      </motion.div>
 
       <div className="absolute inset-0 z-20 pointer-events-none flex flex-col items-start justify-center pt-64 px-8 md:px-16 lg:px-32 mix-blend-difference text-white">
         <motion.h1
