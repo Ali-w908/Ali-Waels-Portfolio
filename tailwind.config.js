@@ -5,23 +5,17 @@ module.exports = {
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
+  darkMode: 'class',
   theme: {
     extend: {
       colors: {
-        anti: {
-          bg: '#ffffff',
-          surface: '#f8f9fa',
-          surfaceHover: '#f1f3f4',
-          border: '#dadce0',
-          text: '#202124',
-          textMuted: '#5f6368',
-          primary: '#1a73e8', // Google Blue
-          primaryHover: '#174ea6',
-          accentRed: '#ea4335',
-          accentYellow: '#fbbc04',
-          accentGreen: '#34a853',
-          accentPurple: '#a142f4',
-          accentCyan: '#12b5cb',
+        theme: {
+          hero: 'var(--bg-hero)',
+          main: 'var(--bg-main)',
+          footer: 'var(--bg-footer)',
+          text: 'var(--text-primary)',
+          footerText: 'var(--text-footer)',
+          accent: 'var(--accent)',
         }
       },
       fontFamily: {
