@@ -19,21 +19,27 @@ export const portfolioData = {
       description: "A Machine Learning enhanced smart emergency ventilator, built to provide overworked ICU medical staff with consistent, safe, and intelligent ventilation. Provides PCV, VCV, and Assist Control modes with real-time waveform display and ML-driven breath classification.",
       theAsk: "Automate a standard BVM to serve as a low-cost emergency ventilator, integrating ML to classify patient breath types and provide critical insights to medical staff.",
       theResult: "Developed an autonomous emergency BVM ventilator providing consistent ventilation, smart alarm systems, real-time waveforms, and ML-driven breath analysis — a complete safety-critical embedded system.",
-      contributions: [
-        "Developed robust FSM ventilation firmware in Embedded C/C++ managing real-time sensor calibration, hardware protection, and serial communication.",
-        "Conducted electrical calculations, analysis, and assembled all electrical components with safe, stable wiring.",
-        "Implemented advanced S-Curve motion profiling for stepper motors ensuring jerk-free operation.",
-        "Designed signal conditioning for MPX5010DP and BMP280 sensors using ADC oversampling and EMA filters.",
-        "Directed the team across mechanical, electrical, software, and medical domains using Agile methodology."
-      ],
       techStack: ["Embedded C/C++", "Machine Learning", "Raspberry Pi", "Arduino", "S-Curve Motion Profiling", "DSP Filters", "I2C", "SSH"],
       skills: ["Embedded C/C++", "Machine Learning", "Motor Control", "DSP", "Medical Devices", "Team Leadership"],
       repo: "https://github.com/Smart-E-Vent-26/Smart-E-Vent-Software",
-      image: "/media/smart-E-Vent-preview.jpeg"
+      image: "/media/smart-E-Vent-preview.jpeg",
+      sections: [
+        {
+          title: "System Architecture & Firmware",
+          text: "Developed robust FSM ventilation firmware in Embedded C/C++ managing real-time sensor calibration, hardware protection, and serial communication. Implemented advanced S-Curve motion profiling for stepper motors ensuring jerk-free operation."
+        },
+        {
+          title: "Signal Processing",
+          text: "Designed signal conditioning for MPX5010DP and BMP280 sensors using ADC oversampling and EMA filters to provide clean data for the ML model and control loop."
+        },
+        {
+          title: "Leadership",
+          text: "Directed the team across mechanical, electrical, software, and medical domains using Agile methodology, conducting electrical calculations and assembling all components with safe, stable wiring."
+        }
+      ]
     },
     {
       id: "museum-guide",
-      customLayout: "museum-guide",
       title: "Autonomous Museum Guide Robot",
       role: "Systems Architect",
       date: "Feb 2025 – May 2025",
@@ -41,11 +47,66 @@ export const portfolioData = {
       description: "Designed and deployed an indoor autonomous navigation system using ROS, integrating motor control, visual tracking, and an interactive tour guide with YOLOv11 artifact detection and TTS.",
       theAsk: "Build an autonomous indoor platform capable of real-time teleoperation, visual obstacle detection, and guided navigation through a dynamic museum environment.",
       theResult: "Successfully integrated a distributed ROS architecture, overcoming camera processing lag and YOLO misclassifications to achieve robust, real-time autonomous navigation and object detection.",
-      architecture: "An ESP32 node handles low-level hardware control, subscribing to /cmd_vel and publishing /odom using encoder and IMU feedback. A Python navigation node processes kinematics, while a parallel vision thread runs OpenCV and YOLO for real-time object detection and ArUco marker processing.",
-      techStack: ["ROS", "Python", "YOLOv11", "OpenCV", "ESP32", "SolidWorks", "TTS"],
+      techStack: ["ROS2", "Python", "YOLOv11", "OpenCV", "ESP32", "SolidWorks", "TTS"],
       skills: ["ROS", "Python", "YOLO Object Detection", "OpenCV", "ESP32", "SolidWorks"],
       repo: "",
-      image: "/media/Autonomous-Ros-Based-Robot-preview.jpeg"
+      image: "/media/Autonomous-Ros-Based-Robot-preview.jpeg",
+      sections: [
+        {
+          title: "1. Mechanical Design (SOLIDWORKS)",
+          text: "Designed the car chassis in SOLIDWORKS specifically for laser cutting. The design incorporated several flat parts to ensure we could utilize a single sheet of acrylic for cost efficiency and manufacturing speed. I designed the parts to have finger joints compatible with each other for easy assembly, and ensured proper holes were mapped out for the electronic components and the PCB.",
+          media: [
+            { type: "image", src: "/media/museum-guide/CADdesign.png", caption: "Full CAD Design" },
+            { type: "image", src: "/media/museum-guide/CADchassis.png", caption: "Chassis CAD Model" },
+            { type: "image", src: "/media/museum-guide/ElectronicsImag1.jpeg", caption: "Electronics Assembly 1" },
+            { type: "image", src: "/media/museum-guide/ElectronicsImag2.jpeg", caption: "Electronics Assembly 2" },
+            { type: "image", src: "/media/museum-guide/CarwithChassisphone.png", caption: "Physical Chassis Assembly" },
+            { type: "image", src: "/media/museum-guide/CarwithBody.png", caption: "Final Car Body Integration" }
+          ]
+        },
+        {
+          title: "2. Turtlesim & CoppeliaSim Exploration",
+          text: "Working with ROS2 for the first time, I created a keyboard navigable Turtlesim node that listens to keyboard inputs for movement. This served as essential practice before integrating with the actual hardware. I also briefly explored CoppeliaSim to understand simulation capabilities within this ecosystem.",
+          media: [
+            { type: "video", src: "/media/museum-guide/TurtleSimROS.mp4", caption: "Turtlesim Keyboard Navigation Node" }
+          ]
+        },
+        {
+          title: "3. Systematic PID Tuning",
+          text: "We performed PID tuning for the 4 motors separately using a dedicated Python script that allowed us to dynamically test parameters. We utilized a systematic approach, tuning Proportional (P), then Derivative (D), then Integral (I) to achieve optimal settling time and minimal steady-state error."
+        },
+        {
+          title: "4. Teleoperation (Navigation.py)",
+          text: "After assembling and integrating the electrical components and completing the PID tuning, we developed 'Navigation.py' to control the robot via keyboard inputs for manual teleoperation and testing.",
+          media: [
+            { type: "video", src: "/media/museum-guide/Car-with-Chassis.mp4", caption: "Keyboard Teleoperation of the Chassis" }
+          ]
+        },
+        {
+          title: "5. Odometry & Kinematics (Go_to_goal.py)",
+          text: "To achieve autonomous movement to specified (X, Y) coordinates, we developed a 'go to goal' script. This required precise physical and mechanical calibration, mapping desired locations to actual differential motor movements for turning and straight-line driving. We utilized the IMU MPU6050 sensor to actively adjust and calculate movement errors (like motor slip) in real-time."
+        },
+        {
+          title: "6. Camera Calibration",
+          text: "We developed a 'camera_claiberation.py' script capable of calibrating the camera to accurately calculate objects' distance and angle relative to the robot's position, a critical step for spatial awareness."
+        },
+        {
+          title: "7. Obstacle Avoidance & Aruco Markers",
+          text: "Integrated a pre-trained YOLOv11 model to detect standard objects for dynamic obstacle avoidance. We also implemented Aruco marker detection to serve as spatial checkpoints, allowing the robot to update its location and zero-out long-term IMU drift.",
+          media: [
+            { type: "video", src: "/media/museum-guide/Aruco-Obstacle-Avoidance.mp4", caption: "Aruco Marker Detection & Obstacle Avoidance" }
+          ]
+        },
+        {
+          title: "8. YOLOv11 Artifact Training & TTS",
+          text: "Trained a custom YOLOv11 model on 3 specific museum artifacts: a Medieval Sword, a Dinosaur Skull, and an Ancient Vase, using 50+ images per artifact covering different angles and lighting. When the robot detects an artifact, it stops and utilizes a Text-to-Speech (TTS) integration to present the artifact to tourists. \n\n*Engineering Note*: We encountered significant friction issues due to rubber wheels on tile (بلاط) floors. We solved this practically by applying starch (نشا طعام) to the wheels, which effectively reduced friction and allowed smooth differential turning.",
+          media: [
+            { type: "image", src: "/media/museum-guide/dino1.jpeg", caption: "Dinosaur Artifact Dataset" },
+            { type: "image", src: "/media/museum-guide/sword1.jpeg", caption: "Sword Artifact Dataset" },
+            { type: "image", src: "/media/museum-guide/vase1.jpeg", caption: "Vase Artifact Dataset" }
+          ]
+        }
+      ]
     },
     {
       id: "embedded-linux-2025",
@@ -57,13 +118,6 @@ export const portfolioData = {
       description: "Engineered a specialized custom Linux operating system from scratch for Raspberry Pi 4, seamlessly integrated with Qt 6.8.4, designed for Ezzmedical's unconditionally approved medical ventilator device.",
       theAsk: "Build a highly dependable embedded OS foundation for a life-saving medical ventilator, ensuring rapid boot times, robust application integration, and security compliance readiness.",
       theResult: "Delivered a production-ready custom Linux OS with Qt 6.8.4 integration, custom systemd services, CAN bus setup, splash screens, and successful migration from Yocto Kirkstone to Scarthgap (5.0.10).",
-      contributions: [
-        "Built and configured Yocto meta layers (meta-qt6, meta-raspberrypi, meta-openembedded, meta-boot2qt) for Raspberry Pi 4.",
-        "Integrated the Qt ventilator application with full functionality including Screenshot Utility, OpenGL, EGLFS, SQLite, and Audio Support.",
-        "Wrote systemd services for auto-launch, CAN bus setup, splash screen, and system configurations.",
-        "Migrated the entire system from Kirkstone to Scarthgap, updating recipes and ensuring Qt 6.8.4 compatibility.",
-        "Researched and prepared secure boot, user monitoring, and system hardening for medical regulatory certifications."
-      ],
       techStack: ["Yocto Project", "BitBake", "Embedded Linux", "Qt 6.8.4", "Raspberry Pi 4", "systemd", "CAN Bus"],
       skills: ["Embedded Linux", "Yocto Project", "BitBake", "Linux customization", "U-Boot", "Qt"],
       repo: "",
@@ -72,7 +126,25 @@ export const portfolioData = {
         name: "Eng. Mohamed Elshaikh",
         title: "Software Engineering Senior Manager @ EzzMedical",
         text: "I highly recommend Ali for their strong contributions as an Embedded Linux Engineer intern at EzzMedical. They quickly adapted to complex tasks, showed excellent problem-solving skills, and worked with professionalism and dedication throughout their internship."
-      }
+      },
+      sections: [
+        {
+          title: "Environment Setup & Toolchain Building",
+          text: "Configured the build environment for Raspberry Pi 4, cloning and setting up essential Yocto meta layers including meta-qt6, meta-raspberrypi, and meta-boot2qt. Generated a robust cross-toolchain for deploying Qt applications directly from Windows hosts."
+        },
+        {
+          title: "Application Integration & Features",
+          text: "Integrated the Qt ventilator application into the OS image. Enabled critical features such as Screenshot Utility, OpenGL, EGLFS, SQLite, and Audio Support. Engineered systemd services to manage automatic startup, CAN bus configuration, and custom branded splash screens."
+        },
+        {
+          title: "Migration to Scarthgap",
+          text: "Successfully migrated the system from Kirkstone to Scarthgap (Yocto 5.0.10), updating recipes and resolving dependency mismatches to ensure full compatibility with Qt 6.8.4 and align with upstream best practices."
+        },
+        {
+          title: "Security Preparations",
+          text: "Documented preparatory research for secure boot, user monitoring, and system hardening to lay the groundwork for future medical device security compliance."
+        }
+      ]
     },
     {
       id: "robotic-arm",
@@ -83,17 +155,25 @@ export const portfolioData = {
       description: "Configured and deployed control software for an advanced 6-DOF collaborative robotic arm (Piper). Bridged hardware CAN Bus protocols with high-level Python control and prototyped real-time teleoperation via smartphone IMU data.",
       theAsk: "Enable high-precision trajectory tracking and remote teleoperation for a 6-DOF robotic arm using smartphone sensors and the Piper SDK.",
       theResult: "Successfully achieved real-time, low-latency teleoperation by extracting IMU data from a smartphone via HTTP requests, dynamically driving the arm's joints in a reactive control system.",
-      contributions: [
-        "Troubleshot and configured a Linux VM (Ubuntu) environment for secure external hardware communication, solving USB passthrough bottlenecks.",
-        "Configured the can0 network interface, managed baud rates, and monitored live telemetry.",
-        "Programmed the arm to grip an upright pencil cap and relocate it without tipping — requiring high spatial accuracy.",
-        "Extracted real-time IMU data from a smartphone (Phyphox app) via HTTP to dynamically drive the arm's joints."
-      ],
       techStack: ["CAN Bus", "Linux", "Python", "Piper SDK", "IMU Integration", "Virtual Machines"],
       skills: ["Robotics", "CAN Bus", "Linux", "Python", "Virtual Machines"],
       repo: "https://github.com/agilexrobotics/piper_sdk",
       repoLabel: "Piper SDK (Open Source)",
-      video: "/media/RoboticArm-Teleoperation-previewVid.mp4"
+      video: "/media/RoboticArm-Teleoperation-previewVid.mp4",
+      sections: [
+        {
+          title: "Hardware Interface & Networking",
+          text: "Troubleshot and configured a Linux VM (Ubuntu) environment for secure external hardware communication, solving critical USB passthrough bottlenecks. Configured the can0 network interface and managed baud rates for live telemetry."
+        },
+        {
+          title: "High-Precision Trajectory Tracking",
+          text: "Programmed the arm using high-level Python control laws to grip an upright pencil cap and relocate it without tipping — a task demanding extremely high spatial accuracy and smooth trajectory profiling."
+        },
+        {
+          title: "IMU Teleoperation",
+          text: "Prototyped a real-time reactive control system by extracting IMU data from a smartphone (using the Phyphox app) via HTTP requests, mapping the data to dynamically drive the 6-DOF joints."
+        }
+      ]
     },
     {
       id: "pick-place-robot",
@@ -104,23 +184,40 @@ export const portfolioData = {
       description: "Engineered a 4-DOF custom robotic arm with a closed-loop PID-controlled gripper, combining precision pick-and-place with CoppeliaSim-simulated face mask detection using YOLOv8 and OpenCV.",
       theAsk: "Accurately execute robotic pick-and-place on a 6-cube grid while managing actuator power draw and complex spatial trajectories. Separately, simulate face mask detection and robotic handling in CoppeliaSim.",
       theResult: "Achieved reliable, collision-free movement via anti-brownout sequential logic and a custom PID gripper controller. Successfully simulated face mask detection and picking in CoppeliaSim.",
-      contributions: [
-        "Designed the electrical system with a split-power topology isolating ESP32 logic from servo inrush spikes.",
-        "Built a custom DC-motor gripper with potentiometer feedback and closed-loop PID control with deadband thresholds.",
-        "Pre-calculated trajectories in MATLAB using Denavit-Hartenberg kinematics.",
-        "Implemented anti-brownout sequential logic for safe multi-actuator movement.",
-        "Simulated face mask detection in CoppeliaSim with YOLOv8 and OpenCV integration."
-      ],
       techStack: ["ESP32", "PID Control", "MATLAB", "D-H Kinematics", "SolidWorks", "CoppeliaSim", "YOLOv8", "OpenCV"],
       skills: ["ESP32", "PID Control", "MATLAB Kinematics", "SolidWorks", "CoppeliaSim", "Computer Vision"],
       repo: "",
       image: "/media/PickPlace-RoboticArm-preview.jpeg",
-      media: [
-        { type: "image", src: "/media/pick-place/cad-model.png", caption: "CAD Model" },
-        { type: "image", src: "/media/pick-place/schematic.png", caption: "Schematic View" },
-        { type: "image", src: "/media/pick-place/component-view.png", caption: "Component View" },
-        { type: "image", src: "/media/pick-place/custom-gripper.jpeg", caption: "Custom Potentiometer Gripper" },
-        { type: "video", src: "/media/PickPlace-SimVideo.mp4", caption: "CoppeliaSim Face Mask Detection" }
+      sections: [
+        {
+          title: "Electrical Architecture & Anti-Brownout Logic",
+          text: "Designed a split-power electrical topology to isolate the ESP32 logic from high-current servo inrush spikes. Implemented sequential logic to manage the power draw of multiple actuators and prevent system resets.",
+          media: [
+            { type: "image", src: "/media/pick-place/schematic.png", caption: "Electrical Schematic" },
+            { type: "image", src: "/media/pick-place/component-view.png", caption: "Component View" }
+          ]
+        },
+        {
+          title: "Custom PID Gripper",
+          text: "Fabricated a custom DC-motor driven gripper equipped with linear potentiometer feedback. Programmed a closed-loop PID controller with deadband thresholds to ensure firm, gentle grasping of objects without crushing them.",
+          media: [
+            { type: "image", src: "/media/pick-place/custom-gripper.jpeg", caption: "Potentiometer Gripper" }
+          ]
+        },
+        {
+          title: "Kinematics & Trajectory Generation",
+          text: "Pre-calculated all spatial trajectories in MATLAB using Denavit-Hartenberg (D-H) kinematics. Translated these mathematical coordinate models into discrete, executable firmware instructions for the ESP32.",
+          media: [
+            { type: "image", src: "/media/pick-place/cad-model.png", caption: "CAD Model & Kinematics" }
+          ]
+        },
+        {
+          title: "CoppeliaSim & Vision Integration",
+          text: "Separately from the physical arm, simulated a robust face mask detection protocol in CoppeliaSim. Utilized YOLOv8 and OpenCV to identify unmasked individuals and trigger a simulated robotic sorting process.",
+          media: [
+            { type: "video", src: "/media/PickPlace-SimVideo.mp4", caption: "CoppeliaSim Face Mask Detection" }
+          ]
+        }
       ]
     },
     {
@@ -135,7 +232,21 @@ export const portfolioData = {
       techStack: ["ARM Assembly", "STM32F103C8T6", "TFT LCD", "ST-LINK", "SWD", "Keil uVision"],
       skills: ["ARM Assembly", "STM32", "Bare-Metal", "Datasheet Navigation", "Keil uVision"],
       repo: "",
-      image: "/media/STM32Assmbly-preview.jpeg"
+      image: "/media/STM32Assmbly-preview.jpeg",
+      sections: [
+        {
+          title: "Bare-Metal Architecture",
+          text: "Utilized direct memory-mapped I/O to configure APB2 buses, GPIO pins, and clock signals directly in ARM Assembly, completely bypassing standard C HAL libraries."
+        },
+        {
+          title: "Display Interfacing",
+          text: "Communicated directly with the TFT display by manipulating individual control pins and sending 8-bit data/commands to manually initialize the screen and render pixel-perfect shapes and digits."
+        },
+        {
+          title: "Internal Timekeeping",
+          text: "Engineered a custom timekeeping algorithm leveraging the STM32's internal timers instead of relying on an external Real-Time Clock (RTC) module."
+        }
+      ]
     },
     {
       id: "solar-tracker",
@@ -149,7 +260,17 @@ export const portfolioData = {
       techStack: ["Arduino", "SolidWorks", "LDR Sensors", "Servo Control", "Mechatronics"],
       skills: ["Arduino", "SolidWorks", "LDR Sensors", "Servo Control", "Mechatronics"],
       repo: "",
-      video: "/media/Dual-Axis-Solar-Panel-Tracker-Project-vid.mp4"
+      video: "/media/Dual-Axis-Solar-Panel-Tracker-Project-vid.mp4",
+      sections: [
+        {
+          title: "Mechanical Fabrication",
+          text: "Designed a robust, interlocking frame in SolidWorks optimized for laser cutting. The pan-tilt servo mechanism provides 2 degrees of freedom to accurately track the sun's trajectory."
+        },
+        {
+          title: "Closed-Loop Control",
+          text: "Implemented a closed-loop system using an Arduino to sample analog error signals from a quadrant of 4 LDRs acting as a voltage divider, dynamically adjusting the servos to minimize the angle of incidence."
+        }
+      ]
     },
     {
       id: "bottling-simulation",
@@ -163,7 +284,17 @@ export const portfolioData = {
       techStack: ["Siemens PLCs", "TIA Portal", "SCADA / HMI", "Ladder Logic (LD)"],
       skills: ["Siemens PLCs", "TIA Portal", "SCADA / HMI", "Ladder Logic (LD)"],
       repo: "",
-      image: "/media/plc_project_state_diagram.svg"
+      image: "/media/plc_project_state_diagram.svg",
+      sections: [
+        {
+          title: "Industrial Control Architecture",
+          text: "Managed a cascaded multi-tank system where the PLC reads analog data from ultrasonic level transmitters to control solenoids and variable flow-rate pumps."
+        },
+        {
+          title: "State Management & HMI",
+          text: "Developed comprehensive Ladder Logic (LD) for automated duty/standby pump switching, fault handling, and safety interlocks, monitored via a fully functional SCADA/HMI interface."
+        }
+      ]
     },
     {
       id: "embedded-linux-2024",
@@ -175,16 +306,20 @@ export const portfolioData = {
       description: "Built a customized Linux image and toolchain for the deployment of a medical ventilator application on a new iMX8mp board, successfully deploying the application and encouraging the company to invest further in embedded Linux.",
       theAsk: "Build a custom Linux image and cross-compilation toolchain for a newly acquired iMX8mp board, and deploy the medical ventilator application onto it.",
       theResult: "Successfully deployed the ventilator application on the custom-built Linux OS, demonstrating feasibility and inspiring further company investment in embedded Linux technology.",
-      contributions: [
-        "Built and customized the Linux image following iWave's documentation for the iMX8mp-4g board.",
-        "Resolved network connectivity (do_fetch) issues by optimizing network configuration.",
-        "Built the SDK cross-compiler and manually configured the Qt Creator kit for the board.",
-        "Successfully deployed the ventilator software on the custom OS running on the iMX8mp board."
-      ],
       techStack: ["Yocto Project", "Embedded Linux", "Qt Creator", "iMX8mp", "Cross-compilation", "SDK"],
       skills: ["Embedded Linux", "Yocto Project", "Linux customization", "Qt Creator", "Cross-compilation"],
       repo: "",
-      image: "/media/Ezzmedical-Embedded-Linux-2024intern.png"
+      image: "/media/Ezzmedical-Embedded-Linux-2024intern.png",
+      sections: [
+        {
+          title: "Linux Image Compilation",
+          text: "Customized and built the Linux image following iWave's documentation for the iMX8mp-4g board, resolving massive `do_fetch` network connectivity and disk space bottlenecks along the way."
+        },
+        {
+          title: "Toolchain & Deployment",
+          text: "Successfully built the SDK cross-compiler and manually configured the Qt Creator kit to deploy the ventilator software directly onto the board, proving the viability of embedded Linux for the product line."
+        }
+      ]
     },
     {
       id: "atm-software",
@@ -199,7 +334,17 @@ export const portfolioData = {
       techStack: ["Raspberry Pi 3B+", "Python", "Embedded Linux", "Linux Customization", "Bootloader", "File Systems"],
       skills: ["Embedded Linux", "Python", "Raspberry Pi", "Linux customization", "Bootloader"],
       repo: "",
-      image: "/media/IMTcertificate.jpg"
+      image: "/media/IMTcertificate.jpg",
+      sections: [
+        {
+          title: "OS Customization",
+          text: "Built a fully customized Linux image from scratch for the Raspberry Pi 3B+, managing the bootloader, kernel, and root filesystem."
+        },
+        {
+          title: "Transaction Logic",
+          text: "Engineered Python-based transaction logic handling card authentication, deposits, withdrawals, and secure password management, backed by an auto-updating local database."
+        }
+      ]
     }
   ],
 

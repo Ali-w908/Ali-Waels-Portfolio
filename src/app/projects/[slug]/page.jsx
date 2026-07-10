@@ -1,6 +1,5 @@
 import { portfolioData } from '@/data/portfolioData';
 import ProjectCaseStudy from './ProjectCaseStudy';
-import CustomMuseumGuideCaseStudy from './CustomMuseumGuideCaseStudy';
 import Link from 'next/link';
 import { ArrowLeft } from 'lucide-react';
 import fs from 'fs';
@@ -100,10 +99,6 @@ export default async function ProjectPage({ params }) {
   }
 
   const { codeSnippets, extractedText } = extractProjectData(resolvedParams.slug);
-
-  if (project.customLayout === 'museum-guide') {
-    return <CustomMuseumGuideCaseStudy project={project} codeSnippets={codeSnippets} extractedText={extractedText} />;
-  }
 
   return <ProjectCaseStudy project={project} codeSnippets={codeSnippets} extractedText={extractedText} />;
 }
