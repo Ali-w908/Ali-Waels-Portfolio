@@ -40,7 +40,7 @@ function PortraitShaderMaterial({ imageTex, depthTex }) {
     varying vec2 vUv;
     void main() {
       vUv = uv;
-      gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+      gl_Position = vec4(position.xy, 0.0, 1.0);
     }
   `;
 
@@ -93,11 +93,10 @@ function Scene() {
     "/media/portrait4.jpeg",
     "/media/depth-map.png"
   ]);
-  const { viewport } = useThree();
 
   return (
     <mesh>
-      <planeGeometry args={[viewport.width, viewport.height]} />
+      <planeGeometry args={[2, 2]} />
       <PortraitShaderMaterial imageTex={imageTex} depthTex={depthTex} />
     </mesh>
   );
