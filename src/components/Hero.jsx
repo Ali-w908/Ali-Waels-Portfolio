@@ -123,10 +123,10 @@ export default function Hero() {
       ></motion.canvas>
 
       {/* Portrait Element Wrapper (Handles alignment & responsive dimensions) */}
-      <div className="absolute top-[35%] md:top-[45%] left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 w-48 h-64 md:w-64 md:h-80 lg:w-80 lg:h-[400px]">
+      <div className="absolute top-[35%] md:top-[40%] left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 w-48 h-64 md:w-64 md:h-80 lg:w-80 lg:h-[400px]">
         <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={hasRun ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
+          initial={{ opacity: 0 }}
+          animate={hasRun ? { opacity: 1 } : { opacity: 0 }}
           transition={{ duration: 1, ease: [0.76, 0, 0.24, 1], delay: 0.3 }}
           className="w-full h-full rounded-3xl overflow-hidden border-2 border-white/20 shadow-2xl mix-blend-luminosity"
           style={{ rotateX, rotateY, perspective: 1000 }}
@@ -136,7 +136,7 @@ export default function Hero() {
       </div>
 
       {/* Text Container (Adjust 'items-start' to change alignment, 'pt-64' to push it further down, 'px-8' for side padding) */}
-      <div className="absolute inset-0 z-20 pointer-events-none flex flex-col items-start justify-center pt-64 px-8 md:px-16 lg:px-32 mix-blend-difference text-white">
+      <div className="absolute inset-0 z-20 pointer-events-none flex flex-col items-start justify-center pt-52 px-8 md:px-16 lg:px-32 mix-blend-difference text-white">
         <motion.h1
           initial={{ opacity: 0, y: 50 }}
           animate={hasRun ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
