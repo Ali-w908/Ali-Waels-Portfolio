@@ -123,12 +123,12 @@ export default function Hero() {
       ></motion.canvas>
 
       {/* Portrait Element Wrapper (Handles alignment & responsive dimensions) */}
-      <div className="absolute top-[35%] md:top-[40%] left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 w-48 h-64 md:w-64 md:h-80 lg:w-80 lg:h-[400px]">
+      <div className="absolute top-[35%] md:top-[35%] left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 w-48 h-64 md:w-64 md:h-80 lg:w-80 lg:h-[400px]">
         <motion.div
           initial={{ opacity: 0 }}
           animate={hasRun ? { opacity: 1 } : { opacity: 0 }}
           transition={{ duration: 1, ease: [0.76, 0, 0.24, 1], delay: 0.3 }}
-          className="w-full h-full rounded-3xl overflow-hidden border-2 border-white/20 shadow-2xl mix-blend-luminosity"
+          className="w-full h-full rounded-3xl overflow-hidden border-2 border-white/20 mix-blend-luminosity"
           style={{ rotateX, rotateY, perspective: 1000 }}
         >
           <HeroWebGLPortrait />
