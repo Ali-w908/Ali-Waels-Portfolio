@@ -122,25 +122,24 @@ export default function Hero() {
         transition={{ duration: 1.5, ease: [0.76, 0, 0.24, 1], delay: 0.2 }}
       ></motion.canvas>
 
-      <div className="absolute inset-0 z-20 pointer-events-none flex flex-col items-center justify-center px-8 md:px-16 lg:px-32 text-white">
-        
-        {/* Portrait placed physically above the text */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={hasRun ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
-          transition={{ duration: 1, ease: [0.76, 0, 0.24, 1], delay: 0.3 }}
-          className="pointer-events-auto z-10 w-48 h-64 md:w-64 md:h-80 lg:w-80 lg:h-[400px] rounded-3xl overflow-hidden border-2 border-white/20 shadow-2xl mix-blend-luminosity mb-8 md:mb-12"
-          style={{ rotateX, rotateY, perspective: 1000 }}
-        >
-          <HeroWebGLPortrait />
-        </motion.div>
+      {/* Portrait Element (Adjust 'top-XX' or '-translate-y-XX' here to move it vertically, and 'left-XX' for horizontal) */}
+      <motion.div
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={hasRun ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
+        transition={{ duration: 1, ease: [0.76, 0, 0.24, 1], delay: 0.3 }}
+        className="absolute top-[35%] md:top-[40%] left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 w-48 h-64 md:w-64 md:h-80 lg:w-80 lg:h-[400px] rounded-3xl overflow-hidden border-2 border-white/20 shadow-2xl mix-blend-luminosity"
+        style={{ rotateX, rotateY, perspective: 1000 }}
+      >
+        <HeroWebGLPortrait />
+      </motion.div>
 
-        {/* Text placed below the portrait */}
+      {/* Text Container (Adjust 'items-start' to change alignment, 'pt-64' to push it further down, 'px-8' for side padding) */}
+      <div className="absolute inset-0 z-20 pointer-events-none flex flex-col items-start justify-center pt-64 px-8 md:px-16 lg:px-32 mix-blend-difference text-white">
         <motion.h1
           initial={{ opacity: 0, y: 50 }}
           animate={hasRun ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
           transition={{ duration: 1, ease: [0.76, 0, 0.24, 1], delay: 0.2 }}
-          className="text-5xl md:text-8xl lg:text-[120px] font-bold tracking-tighter leading-none text-center mix-blend-difference"
+          className="text-5xl md:text-8xl lg:text-[120px] font-bold tracking-tighter leading-none mb-6"
         >
           {portfolioData.personalInfo.name.split(' ')[0]}<br />
           {portfolioData.personalInfo.name.split(' ').slice(1).join(' ')}
