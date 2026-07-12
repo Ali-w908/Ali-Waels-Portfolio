@@ -2,8 +2,8 @@ name: Generate CV PDF
 
 on:
   push:
-    paths:
-      - 'CVs/AliWael-cv.md'
+    branches:
+      - main
 
 jobs:
   build-pdf:
@@ -22,8 +22,8 @@ jobs:
 
       - name: Generate PDF from Markdown
         run: |
-          pandoc CVs/AliWael-cv.md \
-            -o portfolio/public/AliWael-cv.pdf \
+          pandoc src/data/AliWael-cv.md \
+            -o public/AliWael-cv.pdf \
             --pdf-engine=xelatex \
             -V geometry:margin=1in \
             -V mainfont="DejaVu Sans" \
@@ -33,6 +33,6 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add portfolio/public/AliWael-cv.pdf
+          git add public/AliWael-cv.pdf
           git diff --cached --quiet || git commit -m "chore: auto-generate CV PDF from markdown"
           git push

@@ -9,19 +9,13 @@ export const metadata = {
 
 export default function ResumePage() {
   // Read the CV markdown at build time
-  const cvPath = path.join(process.cwd(), '..', 'CVs', 'AliWael-cv.md');
+  const cvPath = path.join(process.cwd(), 'src', 'data', 'AliWael-cv.md');
   let cvContent = '';
 
   try {
     cvContent = fs.readFileSync(cvPath, 'utf-8');
   } catch (e) {
-    // Fallback: try from the portfolio root
-    try {
-      const fallbackPath = path.join(process.cwd(), 'CVs', 'AliWael-cv.md');
-      cvContent = fs.readFileSync(fallbackPath, 'utf-8');
-    } catch {
-      cvContent = '# CV not found\n\nPlease ensure the CV markdown file exists at `CVs/AliWael-cv.md`.';
-    }
+    cvContent = '# CV not found\n\nPlease ensure the CV markdown file exists at `src/data/AliWael-cv.md`.';
   }
 
   return <ResumeView content={cvContent} />;
