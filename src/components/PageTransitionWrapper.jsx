@@ -12,7 +12,7 @@ const A_PATH = "M 10 110 L 50 10 L 90 110";
 
 export default function PageTransitionWrapper({ children }) {
   const pathname = usePathname();
-  const isProjectPage = pathname.startsWith('/projects/');
+  const isProjectPage = pathname.startsWith('/projects/') || pathname.startsWith('/resume');
   const [minTimeElapsed, setMinTimeElapsed] = useState(false);
   const [contentReady, setContentReady] = useState(false);
 

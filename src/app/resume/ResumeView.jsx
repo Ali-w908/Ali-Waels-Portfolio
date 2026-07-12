@@ -13,7 +13,7 @@ export default function ResumeView({ content }) {
       {/* Top Navigation */}
       <header className="sticky top-0 z-40 flex items-center justify-between px-6 md:px-16 py-4 bg-theme-main/80 backdrop-blur-xl border-b border-theme-text/10">
         <button
-          onClick={() => router.replace('/')}
+          onClick={() => router.back()}
           className="flex items-center gap-2 text-sm font-bold tracking-widest uppercase opacity-60 hover:opacity-100 transition-opacity"
         >
           <ArrowLeft className="w-4 h-4" />
