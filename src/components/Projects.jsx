@@ -46,7 +46,6 @@ export default function Projects() {
             <motion.div key={project.id} variants={fadeUp}>
               <Link 
                 href={`/projects/${project.id}`}
-                replace
                 className="group block relative w-full aspect-[4/3] rounded-2xl overflow-hidden bg-theme-text/5 border border-theme-text/10"
               >
                 {/* Media */}
