@@ -60,10 +60,16 @@ export default function About() {
 
           <motion.div
             style={{ y: textY, opacity: textOpacity }}
+            className="flex flex-wrap items-center gap-6"
           >
             <Magnetic>
-              <a href="/resume.pdf" target="_blank" className="inline-flex items-center justify-center w-44 h-44 rounded-full border border-theme-text/20 text-base font-bold tracking-widest uppercase hover:bg-theme-text hover:text-theme-main transition-colors duration-500">
+              <a href="/AliWael-cv.pdf" download className="inline-flex items-center justify-center w-44 h-44 rounded-full border border-theme-text/20 text-base font-bold tracking-widest uppercase hover:bg-theme-text hover:text-theme-main transition-colors duration-500">
                 Download CV
+              </a>
+            </Magnetic>
+            <Magnetic>
+              <a href="/resume" className="inline-flex items-center justify-center w-44 h-44 rounded-full border border-theme-text/20 text-base font-bold tracking-widest uppercase hover:bg-theme-text hover:text-theme-main transition-colors duration-500">
+                View CV
               </a>
             </Magnetic>
           </motion.div>

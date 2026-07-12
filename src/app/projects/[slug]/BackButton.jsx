@@ -19,7 +19,7 @@ export default function BackButton() {
   }, []);
 
   const handleClick = () => {
-    router.replace('/#projects');
+    router.back();
   };
 
   const showText = !scrolled || hovered;

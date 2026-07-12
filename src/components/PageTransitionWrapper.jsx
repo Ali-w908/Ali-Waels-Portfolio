@@ -13,27 +13,39 @@ const A_PATH = "M 10 110 L 50 10 L 90 110";
 export default function PageTransitionWrapper({ children }) {
   const pathname = usePathname();
   const isProjectPage = pathname.startsWith('/projects/');
-  const [pageReady, setPageReady] = useState(false);
+  const [minTimeElapsed, setMinTimeElapsed] = useState(false);
+  const [contentReady, setContentReady] = useState(false);
 
-  // Reset readiness whenever pathname changes
+  const pageReady = minTimeElapsed && contentReady;
+
+  // Reset both flags whenever pathname changes
   useEffect(() => {
-    setPageReady(false);
+    setMinTimeElapsed(false);
+    setContentReady(false);
 
     if (!isProjectPage) {
-      setPageReady(true);
+      setMinTimeElapsed(true);
+      setContentReady(true);
       return;
     }
 
-    // Wait for the page content to be in the DOM
-    // Use requestAnimationFrame + a small timeout to ensure rendering is complete
+    // Minimum display time: one full draw cycle (1.2s draw + 0.3s pause = 1.5s)
+    const minTimer = setTimeout(() => {
+      setMinTimeElapsed(true);
+    }, 1600);
+
+    // Content readiness: wait for DOM to settle after render
     const raf = requestAnimationFrame(() => {
-      const timer = setTimeout(() => {
-        setPageReady(true);
-      }, 600); // Minimum display time for the loader
-      return () => clearTimeout(timer);
+      const contentTimer = setTimeout(() => {
+        setContentReady(true);
+      }, 600);
+      return () => clearTimeout(contentTimer);
     });
 
-    return () => cancelAnimationFrame(raf);
+    return () => {
+      clearTimeout(minTimer);
+      cancelAnimationFrame(raf);
+    };
   }, [pathname, isProjectPage]);
 
   return (

@@ -21,8 +21,23 @@ function extractProjectData(slug) {
     'bottling-simulation': 'PLC-Automated-Bottle-Filling-and-Capping-Machine',
     'embedded-linux-2025': 'Ezzmedical-Embedded-Linux/Internship2025',
     'embedded-linux-2024': 'Ezzmedical-Embedded-Linux/Internship2024',
-    'atm-software': null, // No project folder exists
-    'robotic-arm': null,  // No project folder exists
+    'atm-software': null,
+    'robotic-arm': null,
+  };
+
+  // Explicit file allowlists for projects with many files
+  const FILE_ALLOWLIST = {
+    'museum-guide': [
+      'Nav_basics/Nav_basics/scripts/Go_To_Goal.py',
+      'camera_claiberation.py',
+      'navigation_1.py',
+      'Advanced_Robotics_Final/Advanced_Robotics_Final/ROS_Node_code_and_YOLO_Model/Museum_Guide.py',
+      'Advanced_Robotics_Final/Advanced_Robotics_Final/ESP_Node_src_codes/main.cpp',
+    ],
+    'smartwatch': [
+      'TFT_CODE.s',
+      'RTC/MP_Project/code.s',
+    ],
   };
 
   const folderName = FOLDER_MAP[slug];
@@ -36,37 +51,52 @@ function extractProjectData(slug) {
   const extractedText = [];
 
   const CODE_EXTENSIONS = ['.py', '.cpp', '.c', '.s', '.js', '.jsx', '.ts', '.tsx', '.h'];
-  const TEXT_EXTENSIONS = ['.txt', '.md'];
+  const TEXT_EXTENSIONS = ['.md'];
 
+  function readFileAsSnippet(fullPath, fileName) {
+    const ext = path.extname(fileName).toLowerCase();
+    if (!CODE_EXTENSIONS.includes(ext) && !TEXT_EXTENSIONS.includes(ext)) return;
+
+    let content = fs.readFileSync(fullPath, 'utf-8');
+    const lines = content.split('\n');
+    if (lines.length > 100) {
+      content = lines.slice(0, 100).join('\n') + '\n\n// ... (content truncated to 100 lines for readability)';
+    }
+    if (CODE_EXTENSIONS.includes(ext)) {
+      let language = 'javascript';
+      if (ext === '.py') language = 'python';
+      else if (ext === '.cpp' || ext === '.c' || ext === '.h') language = 'cpp';
+      else if (ext === '.s') language = 'assembly';
+      
+      codeSnippets.push({ file: fileName, content, language });
+    } else if (TEXT_EXTENSIONS.includes(ext)) {
+      extractedText.push({ file: fileName, content });
+    }
+  }
+
+  // If this project has an allowlist, only include those specific files
+  if (FILE_ALLOWLIST[slug]) {
+    for (const relativePath of FILE_ALLOWLIST[slug]) {
+      const fullPath = path.join(projectPath, relativePath);
+      if (fs.existsSync(fullPath)) {
+        readFileAsSnippet(fullPath, path.basename(relativePath));
+      }
+    }
+    return { codeSnippets, extractedText };
+  }
+
+  // Otherwise, recursive scan (for other projects)
   function scanDir(dir) {
     try {
       const files = fs.readdirSync(dir);
       for (const file of files) {
-        // Skip node_modules or huge folders if any
         if (file === 'node_modules' || file === '.git') continue;
         
         const fullPath = path.join(dir, file);
         if (fs.statSync(fullPath).isDirectory()) {
           scanDir(fullPath);
         } else {
-          const ext = path.extname(file).toLowerCase();
-          if (CODE_EXTENSIONS.includes(ext) || TEXT_EXTENSIONS.includes(ext)) {
-            let content = fs.readFileSync(fullPath, 'utf-8');
-            const lines = content.split('\n');
-            if (lines.length > 100) {
-              content = lines.slice(0, 100).join('\n') + '\n\n// ... (content truncated to 100 lines for readability)';
-            }
-            if (CODE_EXTENSIONS.includes(ext)) {
-              let language = 'javascript';
-              if (ext === '.py') language = 'python';
-              else if (ext === '.cpp' || ext === '.c' || ext === '.h') language = 'cpp';
-              else if (ext === '.s') language = 'assembly';
-              
-              codeSnippets.push({ file, content, language });
-            } else if (TEXT_EXTENSIONS.includes(ext)) {
-              extractedText.push({ file, content });
-            }
-          }
+          readFileAsSnippet(fullPath, file);
         }
       }
     } catch (err) {
