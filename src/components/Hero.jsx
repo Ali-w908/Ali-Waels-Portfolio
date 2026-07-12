@@ -116,7 +116,7 @@ export default function Hero() {
       {/* Background Fluid Canvas */}
       <motion.canvas
         id="canvas-fluid"
-        className="absolute inset-0 w-full h-full z-[5]"
+        className="absolute inset-0 w-full h-full z-[5] pointer-events-none"
         initial={{ opacity: 0 }}
         animate={{ opacity: hasRun ? 0.3 : 0 }}
         transition={{ duration: 1.5, ease: [0.76, 0, 0.24, 1], delay: 0.2 }}

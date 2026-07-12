@@ -2,11 +2,11 @@
 
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import Link from 'next/link';
-import { ArrowLeft, ExternalLink, CheckCircle2, ChevronDown, FileText, Code2 } from 'lucide-react';
+import { ExternalLink, CheckCircle2, ChevronDown, FileText, Code2 } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { vscDarkPlus } from 'react-syntax-highlighter/dist/cjs/styles/prism';
+import BackButton from './BackButton';
 
 const fadeUp = {
   hidden: { opacity: 0, y: 20 },
@@ -22,6 +22,9 @@ export default function ProjectCaseStudy({ project, codeSnippets = [], extracted
 
   return (
     <div className="w-full min-h-screen bg-theme-main text-theme-text pb-32">
+      {/* Sticky Back Button */}
+      <BackButton />
+
       {/* Hero Section */}
       <section className="relative w-full h-[60vh] md:h-[70vh] flex items-end pb-16 px-8 md:px-16 lg:px-32 bg-neutral-950">
         <div className="absolute inset-0 z-0">
@@ -42,10 +45,6 @@ export default function ProjectCaseStudy({ project, codeSnippets = [], extracted
         </div>
 
         <div className="relative z-10 max-w-5xl">
-          <Link href="/#projects" className="inline-flex items-center gap-2 mb-8 text-sm font-bold tracking-widest uppercase opacity-60 hover:opacity-100 transition-opacity">
-            <ArrowLeft className="w-4 h-4" />
-            Back to Projects
-          </Link>
           <motion.div initial="hidden" animate="visible" variants={fadeUp}>
             <span className="text-sm font-bold tracking-widest uppercase opacity-50 block mb-4">
               {project.date}

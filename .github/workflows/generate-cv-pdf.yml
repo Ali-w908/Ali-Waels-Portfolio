@@ -1,0 +1,38 @@
+name: Generate CV PDF
+
+on:
+  push:
+    paths:
+      - 'CVs/AliWael-cv.md'
+
+jobs:
+  build-pdf:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install Pandoc & LaTeX
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y pandoc texlive-xetex texlive-fonts-recommended texlive-fonts-extra
+
+      - name: Generate PDF from Markdown
+        run: |
+          pandoc CVs/AliWael-cv.md \
+            -o portfolio/public/AliWael-cv.pdf \
+            --pdf-engine=xelatex \
+            -V geometry:margin=1in \
+            -V mainfont="DejaVu Sans" \
+            -V fontsize=11pt
+
+      - name: Commit and push PDF
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add portfolio/public/AliWael-cv.pdf
+          git diff --cached --quiet || git commit -m "chore: auto-generate CV PDF from markdown"
+          git push

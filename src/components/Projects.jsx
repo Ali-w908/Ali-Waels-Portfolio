@@ -46,6 +46,7 @@ export default function Projects() {
             <motion.div key={project.id} variants={fadeUp}>
               <Link 
                 href={`/projects/${project.id}`}
+                replace
                 className="group block relative w-full aspect-[4/3] rounded-2xl overflow-hidden bg-theme-text/5 border border-theme-text/10"
               >
                 {/* Media */}
@@ -74,25 +75,41 @@ export default function Projects() {
                     <span className="text-xs font-bold tracking-widest uppercase opacity-60 text-white mb-2">
                       {project.date}
                     </span>
-                    <h3 className="text-2xl md:text-3xl font-bold tracking-tight text-white mb-2">
+                    <h3 className="text-lg md:text-3xl font-bold tracking-tight text-white mb-2">
                       {project.title}
                     </h3>
                     <p className="text-sm font-medium opacity-80 text-white line-clamp-2 mb-4">
                       {project.role} • {project.association}
                     </p>
                     
-                    {/* Skills Pills */}
+                    {/* Skills Pills — show 2 on mobile, 3 on desktop */}
                     <div className="flex flex-wrap gap-2">
-                      {project.skills.slice(0, 3).map((skill, i) => (
-                        <span key={i} className="px-2 py-1 rounded bg-white/10 backdrop-blur-sm border border-white/20 text-[10px] font-bold tracking-wider uppercase text-white">
-                          {skill}
-                        </span>
-                      ))}
-                      {project.skills.length > 3 && (
-                        <span className="px-2 py-1 rounded bg-white/5 border border-white/10 text-[10px] font-bold tracking-wider uppercase text-white/60">
-                          +{project.skills.length - 3}
-                        </span>
-                      )}
+                      {/* Mobile: show first 2 */}
+                      <span className="md:hidden contents">
+                        {project.skills.slice(0, 2).map((skill, i) => (
+                          <span key={i} className="px-2 py-1 rounded bg-white/10 backdrop-blur-sm border border-white/20 text-[10px] font-bold tracking-wider uppercase text-white">
+                            {skill}
+                          </span>
+                        ))}
+                        {project.skills.length > 2 && (
+                          <span className="px-2 py-1 rounded bg-white/5 border border-white/10 text-[10px] font-bold tracking-wider uppercase text-white/60">
+                            +{project.skills.length - 2}
+                          </span>
+                        )}
+                      </span>
+                      {/* Desktop: show first 3 */}
+                      <span className="hidden md:contents">
+                        {project.skills.slice(0, 3).map((skill, i) => (
+                          <span key={i} className="px-2 py-1 rounded bg-white/10 backdrop-blur-sm border border-white/20 text-[10px] font-bold tracking-wider uppercase text-white">
+                            {skill}
+                          </span>
+                        ))}
+                        {project.skills.length > 3 && (
+                          <span className="px-2 py-1 rounded bg-white/5 border border-white/10 text-[10px] font-bold tracking-wider uppercase text-white/60">
+                            +{project.skills.length - 3}
+                          </span>
+                        )}
+                      </span>
                     </div>
                   </div>
                 </div>
