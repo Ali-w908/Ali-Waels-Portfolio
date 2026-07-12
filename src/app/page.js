@@ -20,7 +20,13 @@ import { usePreloader } from '@/context/PreloaderContext';
 
 function HomeContent() {
   const { hasRun } = usePreloader();
-  const [loading, setLoading] = useState(!hasRun);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    if (hasRun) {
+      setLoading(false);
+    }
+  }, [hasRun]);
   const [hoveredProject, setHoveredProject] = useState(null);
   const [activeProjectDetails, setActiveProjectDetails] = useState(null);
   const [hideLensCursor, setHideLensCursor] = useState(false);
