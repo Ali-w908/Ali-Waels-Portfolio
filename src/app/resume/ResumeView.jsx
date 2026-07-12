@@ -1,33 +1,29 @@
 "use client";
 
 import { motion } from 'framer-motion';
-import { ArrowLeft, Download } from 'lucide-react';
-import { useRouter } from 'next/navigation';
+import { Download } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
+import BackButton from '@/components/BackButton';
 
 export default function ResumeView({ content }) {
-  const router = useRouter();
-
   return (
     <div className="min-h-screen bg-theme-main text-theme-text">
-      {/* Top Navigation */}
-      <header className="sticky top-0 z-40 flex items-center justify-between px-6 md:px-16 py-4 bg-theme-main/80 backdrop-blur-xl border-b border-theme-text/10">
-        <button
-          onClick={() => router.back()}
-          className="flex items-center gap-2 text-sm font-bold tracking-widest uppercase opacity-60 hover:opacity-100 transition-opacity"
-        >
-          <ArrowLeft className="w-4 h-4" />
-          Home
-        </button>
-        <a
-          href="/AliWael-cv.pdf"
-          download
-          className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-theme-text text-theme-main text-xs font-bold tracking-widest uppercase hover:opacity-90 transition-opacity"
-        >
-          <Download className="w-4 h-4" />
-          Download PDF
-        </a>
-      </header>
+      {/* Sticky Back Button (Top Left) */}
+      <BackButton label="Back" />
+
+      {/* Fixed Download PDF Button (Top Right) */}
+      <motion.a
+        href="/AliWael-cv.pdf"
+        download
+        initial={{ opacity: 0, x: 20 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.6, ease: [0.25, 1, 0.5, 1], delay: 0.5 }}
+        className="fixed top-6 right-6 md:top-8 md:right-8 z-50 flex items-center gap-2 px-5 py-2.5 rounded-full bg-theme-main/60 backdrop-blur-xl border border-theme-text/20 shadow-lg hover:bg-theme-main/80 transition-all duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] text-xs font-bold tracking-widest uppercase cursor-pointer"
+      >
+        <Download className="w-4 h-4 shrink-0" />
+        <span className="hidden md:inline-block">Download PDF</span>
+        <span className="md:hidden">PDF</span>
+      </motion.a>
 
       {/* CV Content */}
       <motion.main
@@ -48,15 +44,6 @@ export default function ResumeView({ content }) {
         </div>
       </motion.main>
 
-      {/* Floating Download Button (visible on scroll, mobile-friendly) */}
-      <a
-        href="/AliWael-cv.pdf"
-        download
-        className="fixed bottom-8 right-8 z-50 flex items-center gap-2 px-6 py-3 rounded-full bg-theme-text text-theme-main text-xs font-bold tracking-widest uppercase shadow-2xl hover:scale-105 transition-transform md:hidden"
-      >
-        <Download className="w-4 h-4" />
-        PDF
-      </a>
     </div>
   );
 }

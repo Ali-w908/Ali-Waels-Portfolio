@@ -6,7 +6,7 @@ import { ExternalLink, CheckCircle2, ChevronDown, FileText, Code2 } from 'lucide
 import ReactMarkdown from 'react-markdown';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { vscDarkPlus } from 'react-syntax-highlighter/dist/cjs/styles/prism';
-import BackButton from './BackButton';
+import BackButton from '@/components/BackButton';
 
 const fadeUp = {
   hidden: { opacity: 0, y: 20 },
@@ -23,7 +23,7 @@ export default function ProjectCaseStudy({ project, codeSnippets = [], extracted
   return (
     <div className="w-full min-h-screen bg-theme-main text-theme-text pb-32">
       {/* Sticky Back Button */}
-      <BackButton />
+      <BackButton label="Back to Projects" />
 
       {/* Hero Section */}
       <section className="relative w-full h-[60vh] md:h-[70vh] flex items-end pb-16 px-8 md:px-16 lg:px-32 bg-neutral-950">

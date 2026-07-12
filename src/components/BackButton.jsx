@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowLeft } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 
-export default function BackButton() {
+export default function BackButton({ label = "Back" }) {
   const router = useRouter();
   const [scrolled, setScrolled] = useState(false);
   const [hovered, setHovered] = useState(false);
@@ -49,7 +49,7 @@ export default function BackButton() {
             transition={{ duration: 0.4, ease: [0.76, 0, 0.24, 1] }}
             className="overflow-hidden whitespace-nowrap text-xs font-bold tracking-widest uppercase"
           >
-            Back to Projects
+            {label}
           </motion.span>
         )}
       </AnimatePresence>
