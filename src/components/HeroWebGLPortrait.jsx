@@ -54,16 +54,19 @@ function PortraitShaderMaterial({ imageTex, depthTex }) {
     void main() {
       // Sample the depth map
       float depth = texture2D(uDepth, vUv).r;
-      
-      // Calculate offset based on mouse position and depth
-      // By using (depth - 0.5), we establish a focal plane in the middle.
-      // The foreground (depth=1) moves one way, and the background (depth=0) moves the other.
-      // This halves the absolute displacement per pixel, drastically reducing ghosting/clipping artifacts.
-      vec2 offset = uMouse * ((depth - 0.5) * 0.04);
-      
-      // Sample the main image with the offset UV
-      vec4 color = texture2D(uImage, vUv + offset);
-      
+
+      // Only foreground (depth > 0.5) moves with the mouse.
+      // Background pixels stay completely fixed — no ghost, no gap.
+      // We remap depth from [0.5, 1.0] → [0.0, 1.0] so only foreground layers shift.
+      float foregroundStrength = max(0.0, (depth - 0.5) * 2.0);
+
+      // Intensity 0.03 — subtle but perceptible 3D feel
+      vec2 offset = uMouse * (foregroundStrength * 0.03);
+
+      // Clamp UV so we never sample outside the texture (prevents edge black lines)
+      vec2 shiftedUv = clamp(vUv + offset, 0.001, 0.999);
+
+      vec4 color = texture2D(uImage, shiftedUv);
       gl_FragColor = color;
     }
   `;

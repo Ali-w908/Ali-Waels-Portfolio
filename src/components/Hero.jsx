@@ -3,11 +3,12 @@
 import Image from 'next/image';
 
 import { useRef, useEffect } from 'react';
-import { motion, useScroll, useVelocity, useTransform, useSpring, useAnimationFrame, useMotionValue } from 'framer-motion';
+import { motion, useScroll, useVelocity, useSpring, useAnimationFrame, useMotionValue, useTransform } from 'framer-motion';
 import { portfolioData } from '../data/portfolioData';
 import { usePreloader } from '../context/PreloaderContext';
 
 import HeroWebGLPortrait from './HeroWebGLPortrait';
+import AmbientBackground from './AmbientBackground';
 
 export default function Hero() {
   const { hasRun } = usePreloader();
@@ -65,38 +66,7 @@ export default function Hero() {
     return () => window.removeEventListener("mousemove", handleMouseMove);
   }, [mouseX, mouseY]);
 
-  useEffect(() => {
-    let simulation;
-    import('webgl-fluid').then((webglFluid) => {
-      simulation = webglFluid.default(document.getElementById('canvas-fluid'), {
-        IMMEDIATE: true,
-        TRIGGER: 'hover',
-        SIM_RESOLUTION: 128,
-        DYE_RESOLUTION: 512,
-        DENSITY_DISSIPATION: 3,
-        VELOCITY_DISSIPATION: 1.2,
-        PRESSURE_DISSIPATION: 0.8,
-        PRESSURE_ITERATIONS: 20,
-        CURL: 3,
-        SPLAT_RADIUS: 0.3,
-        SPLAT_FORCE: 6000,
-        SHADING: true,
-        COLORFUL: true,
-        COLOR_UPDATE_SPEED: 10,
-        PAUSED: false,
-        BACK_COLOR: { r: 0, g: 0, b: 0 },
-        TRANSPARENT: true,
-        BLOOM: false
-      });
-    });
 
-    return () => { };
-  }, []);
-
-  const bgTemplate = useTransform(
-    [smoothX, smoothY],
-    ([x, y]) => `radial-gradient(circle at ${x}% ${y}%, rgba(0,128,128,0.4) 0%, rgba(0,255,255,0.3) 25%, rgba(255,255,255,0.2) 50%, transparent 100%)`
-  );
 
   return (
     <motion.section
@@ -104,23 +74,7 @@ export default function Hero() {
       ref={containerRef}
       className="relative w-full min-h-screen shrink-0 flex flex-col justify-center overflow-hidden"
     >
-      {/* Dynamic Mouse & Time Gradient Aura */}
-      <motion.div
-        className="absolute inset-0 z-0 hue-cycle mix-blend-screen"
-        style={{ background: bgTemplate }}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: hasRun ? 0.7 : 0 }}
-        transition={{ duration: 1.5, ease: [0.76, 0, 0.24, 1], delay: 0.2 }}
-      />
-
-      {/* Background Fluid Canvas */}
-      <motion.canvas
-        id="canvas-fluid"
-        className="absolute inset-0 w-full h-full z-[5] pointer-events-none"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: hasRun ? 0.3 : 0 }}
-        transition={{ duration: 1.5, ease: [0.76, 0, 0.24, 1], delay: 0.2 }}
-      ></motion.canvas>
+      <AmbientBackground />
 
       {/* Portrait Element Wrapper (Handles alignment & responsive dimensions) */}
       <div className="absolute top-[35%] md:top-[35%] left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 w-48 h-64 md:w-64 md:h-80 lg:w-80 lg:h-[400px]">
@@ -128,7 +82,7 @@ export default function Hero() {
           initial={{ opacity: 0 }}
           animate={hasRun ? { opacity: 1 } : { opacity: 0 }}
           transition={{ duration: 1, ease: [0.76, 0, 0.24, 1], delay: 0.3 }}
-          className="w-full h-full rounded-3xl overflow-hidden border-2 border-white/20 mix-blend-luminosity"
+          className="w-full h-full rounded-3xl overflow-hidden mix-blend-luminosity shadow-[inset_0_0_0_2px_rgba(255,255,255,0.2)]"
           style={{ rotateX, rotateY, perspective: 1000 }}
         >
           <HeroWebGLPortrait />
