@@ -11,6 +11,145 @@ export const portfolioData = {
 
   projects: [
     {
+      id: "ml-machines",
+      title: "Machine Listener System (ML Fault Recognition)",
+      role: "Machine Learning Engineer",
+      date: "Spring 2026",
+      association: "Pattern Recognition and Neural Networks Course",
+      description: "An optimized 2D Convolutional Neural Network pipeline for real-time factory machine fault detection, achieving #1 rank in competitive evaluation.",
+      theAsk: "Build a robust machine learning pipeline capable of listening to factory audio and classifying it into 6 classes (3 machine types, normal vs. abnormal states) while handling background noise and variations.",
+      theResult: "Developed a memory-optimized CNN pipeline achieving 99.08% test accuracy and a lightning-fast 0.17s inference time, ranking #1 overall in the competition.",
+      techStack: ["Python", "TensorFlow/Keras", "Librosa", "NumPy", "Scikit-Learn", "Matplotlib", "Seaborn", "Noisereduce", "Soundfile"],
+      skills: ["Machine Learning", "Signal Processing", "CNNs", "Audio Processing", "Data Optimization"],
+      repo: "",
+      image: "/media/projects/ml-machines/3Machine2Abnormal-PreProc-TargetFile.png",
+      sections: [
+        {
+          title: "1. EDA & Preprocessing Engine",
+          text: "Analyzed raw factory audio waveforms and built a robust preprocessing engine using Python and Librosa. The engine cleans the audio by aggressively reducing background noise via noisereduce, standardizing volume variations, and performing precise silence removal. This ensures the neural network receives clean, consistent mechanical fault signatures without destroying critical data.",
+          media: [
+            { type: "image", src: "/media/projects/ml-machines/0Machine1Normal-RawAudio.png", caption: "Machine 1 Normal - Raw Waveform" },
+            { type: "image", src: "/media/projects/ml-machines/0Machine1Normal-PreProc.png", caption: "Machine 1 Normal - Cleaned Waveform" },
+            { type: "audio", src: "/media/projects/ml-machines/0Machine1Normal-RawAudio.wav", caption: "Machine 1 Normal State (Raw Audio) - Original factory recording before preprocessing." },
+            { type: "image", src: "/media/projects/ml-machines/3Machine2Abnormal-PreProc-TargetFile.png", caption: "Machine 2 Abnormal - Preprocessed Target" },
+            { type: "audio", src: "/media/projects/ml-machines/3Machine2Abnormal-RawAudio.wav", caption: "Machine 2 Abnormal State (Raw Audio) - Original factory recording showing fault signatures." },
+            { type: "audio", src: "/media/projects/ml-machines/3Machine2Abnormal-Cleaned.wav", caption: "Machine 2 Abnormal State (Cleaned Audio) - Noise-reduced and standardized audio ready for ML extraction." }
+          ]
+        },
+        {
+          title: "2. Mel-Spectrogram Feature Extraction",
+          text: "Neural networks process visual patterns exceptionally well. Therefore, instead of feeding raw 1D audio arrays into the model, the cleaned sound waves were mathematically converted into 2D Mel-Spectrograms (fixed to 128x250 dimensions). To handle the massive dataset (58,000+ files) without crashing system RAM, the pipeline processes each class sequentially, compressing the extracted 2D features into highly efficient .npz archives."
+        },
+        {
+          title: "3. 2D CNN Model Training",
+          text: "Designed and trained a deep 2D Convolutional Neural Network (CNN) specifically tailored for spectrogram image classification. Key optimizations included:\n\n• RAM Management: Feature data was cast to float16 to prevent memory overflow.\n• Imbalance Handling: Computed balanced class weights to force the model to prioritize the minority \"Abnormal\" states.\n• Overfitting Prevention: Implemented strict Early Stopping callbacks to monitor validation loss and restore the absolute best model weights."
+        },
+        {
+          title: "4. The Outcome & Competition Results",
+          text: "The final model was evaluated on a hidden test dataset (11,146 files) where it achieved a staggering 99.08% Test Accuracy with an absolute loss of only 0.0377. \n\nIn the final competition evaluation, our team (Font-astic Four / team_unexpected) achieved Rank 1 overall across all cohorts, boasting the highest Macro F1 Score (0.76) and an incredibly low inference time of 0.17 seconds.",
+          media: [
+            { type: "image", src: "/media/projects/ml-machines/Final-Confusion-Matrix.png", caption: "Final Model Confusion Matrix" }
+          ]
+        },
+        {
+          title: "Classification Report",
+          text: "              precision    recall  f1-score   support\n\n     M1_Norm       0.99      1.00      0.99      3170\n   M1_Abnorm       0.98      0.95      0.96       604\n     M2_Norm       0.99      0.99      0.99      3240\n   M2_Abnorm       0.96      0.97      0.96       648\n     M3_Norm       1.00      1.00      1.00      2880\n   M3_Abnorm       0.99      0.99      0.99       604\n\n    accuracy                           0.99     11146\n   macro avg       0.98      0.98      0.98     11146\nweighted avg       0.99      0.99      0.99     11146"
+        },
+        {
+          title: "Final Competition Leaderboard",
+          text: "Rank 1: team_unexpected (Font-astic Four) | Macro F1: 0.76 (Rank 1) | Time: 0.17s (Rank 3) | Weighted Score: 0.94 | Grade: 7 / 7\nRank 2: team_hidden_layers (Hidden Layers) | Macro F1: 0.74 (Rank 2) | Time: 0.16s (Rank 2) | Weighted Score: 0.93 | Grade: 6.93\nRank 3: team_the_neurons (The Neurons) | Macro F1: 0.70 (Rank 5) | Time: 0.02s (Rank 1) | Weighted Score: 0.84 | Grade: 6.32\nRank 4: team_audio analysts (Audio Analysts) | Macro F1: 0.68 (Rank 8) | Time: 0.29s (Rank 5) | Weighted Score: 0.59 | Grade: 4.70\n..."
+        }
+      ]
+    },
+    {
+      id: "cooling-fan",
+      title: "3D Printed Handheld Manual Cooling Fan",
+      role: "Product Developer & Innovator",
+      date: "Spring 2026",
+      association: "Cairo University",
+      description: "A battery-free, squeeze-actuated personal cooling device developed through rigorous product development methodologies, from customer needs analysis to alpha prototyping.",
+      theAsk: "Apply Product Development and Innovation concepts to identify a market gap, define target specifications, generate concepts, and build a functional physical prototype of a chosen product.",
+      theResult: "Designed and 3D printed a manual squeeze fan that effectively provides airflow without the need for electricity or batteries, validating the mechanics through a physical alpha prototype.",
+      techStack: ["3D Printing", "Product Development", "CAD Integration", "Pugh Matrix", "SolidWorks", "PLA/ABS"],
+      skills: ["Product Innovation", "Needs Analysis", "Rapid Prototyping", "Mechanical Evaluation"],
+      repo: "",
+      video: "/media/projects/cooling-fan/3d-printed-fan-in-action.mp4",
+      sections: [
+        {
+          title: "1. Market Gap & Customer Needs",
+          text: "There is a strong need for cooling in hot climates, but current options rely heavily on batteries, leading to constant charging anxiety and significant e-waste. By conducting direct field observations and semi-structured interviews, we mapped out a latent customer need and translated it into 6 core demands, including effective airflow, portability, and eco-friendliness.",
+          media: [
+            { type: "image", src: "/media/projects/cooling-fan/2.png", caption: "Opportunity Identification & Market Gap" }
+          ]
+        },
+        {
+          title: "2. Concept Generation & Selection",
+          text: "We conducted internal brainstorming to explore diverse mechanical approaches for power-independent operation. This resulted in several concepts, including a Hand Crank Fan, a Squeeze Trigger Fan, a Pull Cord Fan, and a Push Button Fan. Using a Pugh Screening Matrix against a traditional folding hand fan baseline, followed by a Weighted Scoring Matrix driven by 'Airflow effectiveness' and 'Ease of one-hand use', the Manual Squeeze Fan emerged as the definitive winner.",
+          media: [
+            { type: "image", src: "/media/projects/cooling-fan/7.png", caption: "Concept Generation - Alternative Mechanical Designs" },
+            { type: "image", src: "/media/projects/cooling-fan/9.png", caption: "Pugh Screening Matrix" },
+            { type: "image", src: "/media/projects/cooling-fan/10.png", caption: "Weighted Scoring Matrix" }
+          ]
+        },
+        {
+          title: "3. Open-Source CAD Integration",
+          text: "To rapidly accelerate our timeline towards physical validation, we sourced a robust, open-source mechanical assembly design from Printables.com. This allowed us to bypass lengthy iterative gear-modeling and jump straight into testing the mechanical viability and manufacturing constraints (such as checking if PLA/ABS could survive repetitive squeeze stress). You can view the original CAD source here: https://www.printables.com/model/157894-squeeze-fan-ruggedized-not-a-solution-to-an-electr",
+          media: [
+            { type: "image", src: "/media/projects/cooling-fan/13.png", caption: "Prototyping Strategy & Principles" }
+          ]
+        },
+        {
+          title: "4. Alpha Prototype & Functional Validation",
+          text: "We required a physical, focused Alpha Prototype to validate the mechanical airflow and durability. We successfully printed a proof-of-concept assembly to test the gear engagement, linear-to-rotary ratchet mechanics, and blade rotation. The final 3D printed prototype successfully generated sustained airflow via a single ergonomic squeeze action.",
+          media: [
+            { type: "image", src: "/media/projects/cooling-fan/finalprototype.jpeg", caption: "Final 3D Printed Assembly" }
+          ]
+        }
+      ]
+    },
+    {
+      id: "control-room",
+      title: "Control Room Environmental Monitoring System",
+      role: "Hardware Designer & Integrator",
+      date: "Spring 2026",
+      association: "Cairo University",
+      description: "A fully integrated environmental monitoring system for industrial control rooms, featuring an active FSM alarm logic, an ESP32 microcontroller, I2C UI, and a custom CAD enclosure.",
+      theAsk: "Design and prototype a monitoring system for a factory control room to track temperature and humidity. Provide a clear audiovisual alarm if conditions exceed safe, user-defined setpoints to prevent system downtime and hardware damage.",
+      theResult: "Successfully built and integrated a complete mechatronic system with a custom software low-pass filter to overcome digital signal corruption, robust FSM alarm logic, and a professionally laser-cut CAD enclosure.",
+      techStack: ["ESP32", "C++", "SolidWorks", "Fritzing", "I2C", "PCB Assembly", "Signal Processing (EMA)"],
+      skills: ["Embedded Systems", "CAD/SolidWorks", "Hardware Filtering", "Finite State Machines (FSM)", "Industrial Safety", "System Integration"],
+      repo: "",
+      image: "/media/projects/control-room/Control-Room7.jpg",
+      sections: [
+        {
+          title: "1. Hardware Architecture & Breadboard Validation",
+          text: "The system features a DHT11 environmental sensor, a 16x2 I2C LCD, a 4x3 matrix keypad, and an active alarm interface managed via a 5V relay module driving the buzzer and alert lamp. Before committing to a permanent soldered assembly, the entire project was rigorously implemented and tested on a standard solderless breadboard.",
+          media: [
+            { type: "image", src: "/media/projects/control-room/Schematic-View.PNG", caption: "System Schematic Diagram" },
+            { type: "image", src: "/media/projects/control-room/Component-Wiring-View.PNG", caption: "Hardware Wiring and Layout" }
+          ]
+        },
+        {
+          title: "2. The Signal Filtering Challenge",
+          text: "Initially, we planned to utilize a passive RC Low-Pass filter to smooth the sensor signal and remove high-frequency electrical noise. However, because the DHT11 utilizes a proprietary digital 1-wire communication protocol, implementing a hardware capacitor fundamentally corrupted the signal integrity by \"rounding off\" the sharp square waves.\n\nTo overcome this, we designed a custom Software Low-Pass Filter — specifically an Exponential Moving Average (EMA). By heavily weighing the historical data (90%) relative to new incoming data (10%), the software absorbs sudden, unrealistic thermal spikes, ensuring the alarm logic operates robustly without triggering false positives."
+        },
+        {
+          title: "3. Voltage Drop Analysis",
+          text: "When extending sensor wiring 5 meters into the field, voltage drop across the copper wire must be evaluated. We used high-quality 0.5mm² copper wire. Calculating for a total 10-meter round trip, the resistance is 0.39Ω.\n\nWith the DHT11 peak current at 2.5mA, the total voltage drop was 0.000975V (less than 1mV). By supplying a stable 5V input from an LM2596 Buck Converter, the delivered voltage remains comfortably within the required operating range of 3.5V to 5.5V. This proved that mechanical durability, rather than electrical resistance, dictates the wire choice."
+        },
+        {
+          title: "4. CAD Enclosure & Final Assembly",
+          text: "A professional system requires robust physical housing. Utilizing SolidWorks, we engineered a comprehensive mechanical enclosure utilizing wood finger joints. The DXF files were sent for precise laser cutting of the panels, which securely mount the LCD, keypad, buzzer, and internal MCU board while offering professional access to sensor headers.\n\nFollowing successful breadboard validation, the components were rigorously transferred to a Veroboard PCB and placed into the final housing.",
+          media: [
+            { type: "image", src: "/media/projects/control-room/CADDesign1.png", caption: "3D CAD Housing Design" },
+            { type: "image", src: "/media/projects/control-room/CADDesign2.png", caption: "CAD Housing Assembly - Back View" },
+            { type: "image", src: "/media/projects/control-room/Control-Room2.jpg", caption: "Final Assembled Prototype" },
+            { type: "image", src: "/media/projects/control-room/Control-Room7.jpg", caption: "Final Assembled Prototype" }
+          ]
+        }
+      ]
+    },
+    {
       id: "bvm-ventilator",
       title: "ML Enhanced BVM Smart Emergency Ventilator",
       role: "Cross-Functional Team Lead",

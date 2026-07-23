@@ -119,11 +119,15 @@ export default function ProjectCaseStudy({ project, codeSnippets = [], extracted
                     <div className={`grid grid-cols-1 ${section.media.length > 1 ? 'md:grid-cols-2' : ''} gap-4`}>
                       {section.media.map((m, mIdx) => (
                         <div key={mIdx} className="rounded-xl overflow-hidden bg-theme-text/5 border border-theme-text/10">
-                          {m.type === 'video' ? (
-                            <video src={m.src} autoPlay loop muted playsInline controls className="w-full h-auto max-h-[60vh] object-cover bg-black" />
-                          ) : (
-                            <img src={m.src} alt={m.caption} className="w-full h-auto max-h-[60vh] object-cover" />
-                          )}
+                        {m.type === 'video' ? (
+                          <video src={m.src} autoPlay loop muted playsInline controls className="w-full h-auto max-h-[60vh] object-cover bg-black" />
+                        ) : m.type === 'audio' ? (
+                          <div className="w-full h-full flex items-center justify-center p-8 bg-neutral-900/50">
+                            <audio src={m.src} controls className="w-full max-w-sm" />
+                          </div>
+                        ) : (
+                          <img src={m.src} alt={m.caption} className="w-full h-auto max-h-[60vh] object-cover" />
+                        )}
                           {m.caption && (
                             <p className="p-4 text-xs font-bold tracking-widest uppercase opacity-50 text-center">{m.caption}</p>
                           )}

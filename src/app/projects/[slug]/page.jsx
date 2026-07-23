@@ -13,6 +13,9 @@ export function generateStaticParams() {
 
 function extractProjectData(slug) {
   const FOLDER_MAP = {
+    'cooling-fan': '3D-printed-manual-cooling-fan',
+    'control-room': 'Control-Room-Environmental-Monitoring-and-Alarm-System',
+    'ml-machines': 'ML-Machines-Fault-Recognition-Model',
     'museum-guide': 'ROS-based-Robotic-RC-Car',
     'bvm-ventilator': 'GP-ML-BVM-Smart-E-Vent',
     'smartwatch': 'AssemblyOnSTM32',
@@ -27,6 +30,18 @@ function extractProjectData(slug) {
 
   // Explicit file allowlists for projects with many files
   const FILE_ALLOWLIST = {
+    'cooling-fan': [],
+    'control-room': [
+      'Team11-Code.ino',
+      'Project_Report.tex'
+    ],
+    'ml-machines': [
+      'Project-Description.md',
+      'Project_Updated/infer.py',
+      'Project_Updated/run_preprocessing.py',
+      'Project_Updated/src/model.py',
+      'Project_Updated/src/preprocess.py'
+    ],
     'museum-guide': [
       'Nav_basics/Nav_basics/scripts/Go_To_Goal.py',
       'camera_claiberation.py',
@@ -50,8 +65,8 @@ function extractProjectData(slug) {
   const codeSnippets = [];
   const extractedText = [];
 
-  const CODE_EXTENSIONS = ['.py', '.cpp', '.c', '.s', '.js', '.jsx', '.ts', '.tsx', '.h'];
-  const TEXT_EXTENSIONS = ['.md'];
+  const CODE_EXTENSIONS = ['.py', '.cpp', '.c', '.s', '.js', '.jsx', '.ts', '.tsx', '.h', '.ino'];
+  const TEXT_EXTENSIONS = ['.md', '.tex'];
 
   function readFileAsSnippet(fullPath, fileName) {
     const ext = path.extname(fileName).toLowerCase();
