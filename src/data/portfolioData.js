@@ -153,27 +153,66 @@ export const portfolioData = {
       id: "bvm-ventilator",
       title: "ML Enhanced BVM Smart Emergency Ventilator",
       role: "Cross-Functional Team Lead",
-      date: "Feb 2026 – Jun 2026",
+      date: "Sept 2025 – Jul 2026",
       association: "Cairo University — Graduation Project",
-      description: "A Machine Learning enhanced smart emergency ventilator, built to provide overworked ICU medical staff with consistent, safe, and intelligent ventilation. Provides PCV, VCV, and Assist Control modes with real-time waveform display and ML-driven breath classification.",
-      theAsk: "Automate a standard BVM to serve as a low-cost emergency ventilator, integrating ML to classify patient breath types and provide critical insights to medical staff.",
-      theResult: "Developed an autonomous emergency BVM ventilator providing consistent ventilation, smart alarm systems, real-time waveforms, and ML-driven breath analysis — a complete safety-critical embedded system.",
-      techStack: ["Embedded C/C++", "Machine Learning", "Raspberry Pi", "Arduino", "S-Curve Motion Profiling", "DSP Filters", "I2C", "SSH"],
-      skills: ["Embedded C/C++", "Machine Learning", "Motor Control", "DSP", "Medical Devices", "Team Leadership"],
+      description: "A Machine Learning enhanced smart emergency ventilator that automates a standard BVM to deliver consistent, safe, and intelligent ventilation. Features PCV, VCV, and Assist Control modes with real-time waveform display, edge ML breath classification, and sub-millisecond hardware safety cutoffs.",
+      theAsk: "Design and build a fully autonomous emergency ventilator by automating a standard BVM, integrating real-time sensor feedback, ML-driven breath classification, and safety-critical firmware — all at a fraction of commercial ICU ventilator costs.",
+      theResult: "Delivered a working prototype providing PCV, VCV, and Assist Control ventilation modes with real-time waveform display, edge ML inference with 0.985 AUC for breath classification (Normal, Obstructive, Restrictive), and sub-millisecond hardware E-Stop — validated through continuous 10-hour endurance testing. Awarded A- after a rigorous 1-hour technical thesis defense.",
+      techStack: ["Embedded C/C++", "Machine Learning", "Raspberry Pi 4", "Arduino", "TFLite", "Qt 6", "Embedded Linux", "S-Curve Motion Profiling", "DSP Filters", "I2C", "USB Serial"],
+      skills: ["Embedded C/C++", "Machine Learning", "Motor Control", "DSP", "Medical Devices", "Team Leadership", "Safety-Critical Systems", "System Architecture"],
       repo: "https://github.com/Smart-E-Vent-26/Smart-E-Vent-Software",
-      image: "/media/smart-E-Vent-preview.jpeg",
+      video: "/media/projects/bvm-ventilator/Project-inExpo-Preview-Video.mp4",
       sections: [
         {
-          title: "System Architecture & Firmware",
-          text: "Developed robust FSM ventilation firmware in Embedded C/C++ managing real-time sensor calibration, hardware protection, and serial communication. Implemented advanced S-Curve motion profiling for stepper motors ensuring jerk-free operation."
+          title: "1. The Problem: Why Manual Ventilation Fails",
+          text: "Manual ventilation using a Bag-Valve-Mask (BVM) during ICU surges or patient transport demands continuous human pumping, causing rapid operator fatigue, inconsistent tidal volume delivery, uncontrolled airway pressures, and risk of barotrauma. Full-featured commercial ICU ventilators cost $10,000–$50,000+ and are often unavailable in resource-limited settings or mass-casualty crises.\n\nOur mission: transform a standard low-cost BVM into an autonomous, ML-enhanced emergency ventilator that delivers ICU-grade safety features at a fraction of the cost."
         },
         {
-          title: "Signal Processing",
-          text: "Designed signal conditioning for MPX5010DP and BMP280 sensors using ADC oversampling and EMA filters to provide clean data for the ML model and control loop."
+          title: "2. System Architecture",
+          text: "The system uses a master-slave topology with deliberate isolation: a Raspberry Pi 4 handles the Qt GUI, real-time waveforms, and TFLite ML inference, while an Arduino Nano runs the safety-critical 100 Hz FSM control loop, motor kinematics, and sensor processing. They communicate over USB Serial at 115200 baud — this intentional decoupling ensures a UI crash can never interrupt patient ventilation.\n\nA hardwired Emergency Stop button is physically wired in series with the motor driver's enable line. Pressing E-Stop cuts motor power in <1 ms at the hardware level, completely independent of software state.",
+          media: [
+            { type: "image", src: "/media/projects/bvm-ventilator/Communication-Circuit-Architechture.png", caption: "Communication & Circuit Architecture" }
+          ]
         },
         {
-          title: "Leadership",
-          text: "Directed the team across mechanical, electrical, software, and medical domains using Agile methodology, conducting electrical calculations and assembling all components with safe, stable wiring."
+          title: "3. Mechanical Design & Actuation",
+          text: "We evaluated 6 distinct compression mechanisms (Rack & Pinion, Geared Cam, Double Rack, Self-Centering Gripper, Webbing Strap, Cam Follower) using a weighted decision matrix scoring response time, size, noise, bag fixation, torque load, and compression speed. The self-centering gripper mechanism scored highest at 83/100.\n\nTorque analysis confirmed the NEMA 23 closed-loop stepper motor (3.1 N·m) operates at only 46.5% utilization against worst-case bag resistance (150 N at 40 cmH₂O with safety factor 2.0), providing a 53.5% safety margin. Stroke calibration yields ~6 mm of linear compression per 100 mL of delivered volume, covering the full 200–800 mL tidal volume range.",
+          media: [
+            { type: "image", src: "/media/projects/bvm-ventilator/Mechanisms-Comparison.png", caption: "6 Candidate Mechanisms Evaluated" },
+            { type: "image", src: "/media/projects/bvm-ventilator/Mechanisms-Desicion-Matrix.png", caption: "Weighted Decision Matrix" },
+            { type: "image", src: "/media/projects/bvm-ventilator/Mechanism-IsometricView.png", caption: "CAD Isometric View — Selected Mechanism" },
+            { type: "image", src: "/media/projects/bvm-ventilator/Mechanism-Parts.png", caption: "Assembled Mechanism with Labeled Components" }
+          ]
+        },
+        {
+          title: "4. Electronics, Sensing & Safety",
+          text: "The sensor suite includes an MPX5010DP differential pressure sensor across a custom 3D-printed Venturi tube (22→12 mm throat) for flow measurement — with a clever ADC trick using Arduino's internal 1.1V AREF for a 4.5× resolution boost (2.39 Pa/count). Dual BMP280 barometric sensors on I2C (0x76 for circuit, 0x77 for ambient) provide gauge pressure via differential subtraction with ±0.12 cmH₂O accuracy. Dual AT3503 Hall effect sensors provide absolute home and forward-limit referencing.\n\nPower is supplied by a Mean Well LRS-350-36 PSU (350W) through dual isolated LM2596S buck converters — one dedicated rail for the Raspberry Pi 4, one for the Arduino and sensor suite. Safety hardware includes an 85dB piezo alarm, tri-color status LEDs, a crowbar overvoltage protection circuit (SCR + Zener), and the hardwired E-Stop.",
+          media: [
+            { type: "image", src: "/media/projects/bvm-ventilator/Complete-Component-View.png", caption: "Complete System Wiring Diagram" },
+            { type: "image", src: "/media/projects/bvm-ventilator/Final-PCB.png", caption: "Real PCB Assembly vs. PCB Layout Design" },
+            { type: "image", src: "/media/projects/bvm-ventilator/3d-printed-Venturi-Tube.png", caption: "Custom 3D-Printed Venturi Tube for Flow Measurement" }
+          ]
+        },
+        {
+          title: "5. Firmware & Software",
+          text: "The firmware follows a strict 3-layer modular architecture: a Hardware Abstraction Layer (HAL) for GPIO, Motor Driver, Sensors, and Timing; a Service Layer providing the S-Curve Kinematics Engine, EMA Signal Filter, and Safety Monitor daemon; and an Application Layer containing the Ventilator FSM.\n\nExecution uses non-blocking dual loops — a Fast Loop (~50–100 µs) generates jitter-free step pulses for smooth S-curve acceleration profiles, while a Slow Loop (100 Hz) handles sensor acquisition, FSM state evaluation, and serial telemetry streaming. The FSM manages states from BOOT → CALIBRATE (homes against Hall sensor) → READY → INHALE → HOLD → EXHALE → PAUSE, with dedicated FAULT and SOFT_STOP_WAIT states. A hardware Watchdog Timer provides 250 ms automatic MCU reset on any software hang.\n\nThe Raspberry Pi 4 runs a custom Embedded Linux image with Qt 6 / Python GUI rendering real-time 30+ FPS waveforms for Pressure, Flow, and Volume, alongside ML inference and alarm management.",
+          media: [
+            { type: "image", src: "/media/projects/bvm-ventilator/Firmware-State-Flow-Diagram.png", caption: "Firmware FSM State Flow Diagram" },
+            { type: "image", src: "/media/projects/bvm-ventilator/Qt-GUI.jpeg", caption: "Live Qt GUI — Real-Time Pressure, Flow & Volume Waveforms" },
+            { type: "image", src: "/media/projects/bvm-ventilator/Splash-Screen.png", caption: "Custom Branded Boot Splash Screen" }
+          ]
+        },
+        {
+          title: "6. Edge ML & Validation",
+          text: "The ML pipeline classifies patient breathing patterns in real-time on the Raspberry Pi 4: raw telemetry data is segmented into individual breaths, features are extracted (peak pressure, rise time, plateau duration, decay slope), then passed through a Random Forest Classifier to distinguish Normal, Obstructive, and Restrictive lung conditions — achieving an AUC of 0.985.\n\nEndurance testing ran the system continuously for 10 hours at 35 BPM with I:E 1:4. Motor temperature remained stable; PSU reached only ~45°C (rated 70°C, 40% load). Safety verification confirmed E-Stop response <1 ms, driver fault detection <10 ms, and WDT recovery within 250 ms.\n\nThe project was awarded A- following a rigorous 1-hour technical thesis defense at Cairo University.",
+          media: [
+            { type: "image", src: "/media/projects/bvm-ventilator/ML-Pipeline.png", caption: "ML Inference Pipeline Architecture" },
+            { type: "image", src: "/media/projects/bvm-ventilator/ML-Pressure-Waveforms.png", caption: "Pressure Waveforms per Lung Condition Class" },
+            { type: "image", src: "/media/projects/bvm-ventilator/ML-Random-Forest-Classifier.png", caption: "Random Forest Classifier — Ensemble Architecture" },
+            { type: "image", src: "/media/projects/bvm-ventilator/ML-Confusion-Matrix.png", caption: "Confusion Matrix — AUC = 0.985" },
+            { type: "image", src: "/media/projects/bvm-ventilator/ExpoImag2.jpeg", caption: "Demonstrating the Prototype at the Engineering Expo" },
+            { type: "image", src: "/media/projects/bvm-ventilator/smart-E-Vent-preview.jpeg", caption: "The Team at the Graduation Project Expo" }
+          ]
         }
       ]
     },

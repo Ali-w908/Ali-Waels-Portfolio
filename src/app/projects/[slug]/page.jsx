@@ -42,6 +42,10 @@ function extractProjectData(slug) {
       'Project_Updated/src/model.py',
       'Project_Updated/src/preprocess.py'
     ],
+    'bvm-ventilator': [
+      'Software-Architecture-Document.md',
+      'Software-Requirements-Specification.md'
+    ],
     'museum-guide': [
       'Nav_basics/Nav_basics/scripts/Go_To_Goal.py',
       'camera_claiberation.py',
