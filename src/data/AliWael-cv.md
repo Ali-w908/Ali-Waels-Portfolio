@@ -4,7 +4,7 @@
 
 ## **Professional Summary**
 
-Passionate and curious Mechatronics Engineering Senior driven to take on new challenges, continuously learn, and contribute to purposeful, interesting projects. Strong foundation in **Robotics (ROS2, AI for Robotics)** , **Embedded C/C++ development** , **low-level driver implementation** (HAL, CAN, I2C, ADC, PWM), **Machine Learning**, and **Control Theory** . Experienced in bridging physical constraints with efficient control logic across Robotics, Medical Devices, and electromechanical systems. Highly adept at leveraging Generative and Agentic AI tools to optimize workflows.
+Passionate and curious Mechatronics Engineering Senior driven to take on new challenges, continuously learn, and contribute to purposeful, interesting projects. Strong foundation in **Robotics (ROS2, AI for Robotics)** , **Embedded C/C++ development** , **low-level driver implementation** (HAL, CAN, I2C, ADC, PWM), **Machine Learning**, and **Computer Vision**. Experienced in bridging physical constraints with efficient control logic across Robotics, Medical Devices, and electromechanical systems.
 
 ## **Education**
 
@@ -65,9 +65,9 @@ Mapped complex industrial data flows between Level 1 and Level 2 automation hier
 - **Control & Sensor Fusion:** Integrated an MPU6050 IMU and encoders, applying PID control loops for stable, real-time autonomous navigation & Go To Goal logic, applying Aruco Markers Detection and Obstacle Avoidance using phone's camera and real time obstacle detection.
 - **Machine Learning & Final Delivery:**
 
-    - Deployed YOLOv11 object detection, enhancing real-time recognition latency by 30%.
-    - Trained a custom YOLOv11 model on 3 specific museum artifacts using 50+ images per artifact covering different angles and lighting.
-    - When the robot detects an artifact, it stops and utilizes a Text-to-Speech (TTS) integration to present the artifact to tourists.
+  - Deployed YOLOv11 object detection, enhancing real-time recognition latency by 30%.
+  - Trained a custom YOLOv11 model on 3 specific museum artifacts using 50+ images per artifact covering different angles and lighting.
+  - When the robot detects an artifact, it stops and utilizes a Text-to-Speech (TTS) integration to present the artifact to tourists.
 
 ## **Core Skills**
 
