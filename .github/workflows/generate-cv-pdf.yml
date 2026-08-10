@@ -31,8 +31,8 @@ jobs:
 
       - name: Commit and push PDF
         run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git config user.name "Ali-w908"
+          git config user.email "aliwael908@gmail.com"
           git add public/AliWael-cv.pdf
           git diff --cached --quiet || git commit -m "chore: auto-generate CV PDF from markdown"
           git push
