@@ -34,6 +34,7 @@ export default function ResumeView({ content }) {
       >
         <div className="prose prose-lg dark:prose-invert max-w-none
           prose-headings:tracking-tight prose-headings:font-bold
+          prose-h1:text-2xl md:prose-h1:text-3xl prose-h1:border-b prose-h1:border-theme-text/10 prose-h1:pb-3 prose-h1:mt-12 first:prose-h1:mt-0
           prose-h2:text-2xl prose-h2:border-b prose-h2:border-theme-text/10 prose-h2:pb-3 prose-h2:mt-12
           prose-strong:text-theme-text
           prose-p:leading-relaxed prose-p:opacity-90

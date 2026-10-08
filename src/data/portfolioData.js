@@ -585,6 +585,6 @@ export const portfolioData = {
 
   certificates: [
     { id: "imt-embedded-linux", title: "Embedded Linux Course", issuer: "IMT", date: "2023", image: "/media/IMTcertificate.jpg", linkedProject: "atm-software" },
-    { id: "delf-b2", title: "DELF B2", issuer: "French Ministry of Education", date: "2021", image: "/media/DELFB2certificate.jpeg" }
+    { id: "delf-b2", title: "DELF B2", issuer: "French Ministry of Education", date: "08/07/2019", image: "/media/DELFB2certificate.jpeg" }
   ]
 };
